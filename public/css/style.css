@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-family: "Rubik", sans-serif;
+  font-size: 62.5%;
+  box-sizing: border-box; }
+
+.u-blue-light {
+  color: #cddfff; }
+
+.landing__container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); }
+
+.landing__left {
+  height: 100vh;
+  grid-column: 1/span 1;
+  background-color: #015eff;
+  padding: 5rem;
+  display: grid;
+  grid-template-rows: minmax(15rem, 10vh) 1fr; }
+
+.landing__website {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.6; }
+
+.landing__text {
+  color: white; }
+
+.landing__heading {
+  font-size: 3.6rem; }
+
+.landing__p {
+  padding-top: 3rem;
+  font-size: 1.6rem;
+  font-weight: 200; }
+
+.landing__right {
+  height: 100vh;
+  grid-column: 2/-1;
+  background-color: #f5f6f9;
+  padding: 11rem;
+  display: grid;
+  grid-template-rows: repeat(4, max-content);
+  grid-template-columns: minmax(min-content, max-content);
+  row-gap: 2rem; }
+
+.landing__tertiary {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #353644; }
+
+.landing__pr {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #353644;
+  padding-bottom: 5rem; }
+
+.landing__button {
+  width: 35rem;
+  height: 8rem;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-family: "Rubik", sans-serif;
+  cursor: pointer; }
+  .landing__button svg {
+    display: inline-block;
+    float: left;
+    width: 5rem;
+    height: 5rem;
+    fill: #015eff;
+    padding: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    border-radius: 5px;
+    border: 1px solid #015eff; }
+  .landing__button p {
+    display: block;
+    text-align: left;
+    padding-top: .7rem;
+    text-transform: uppercase;
+    color: #353644; }
+  .landing__button span {
+    display: block;
+    text-align: left;
+    padding-top: .5rem;
+    color: #56586f; }

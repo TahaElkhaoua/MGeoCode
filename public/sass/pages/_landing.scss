@@ -1,0 +1,115 @@
+.landing {
+    &__container {
+        width : 100vw;
+        height: 100vh;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+
+
+    &__left {
+        height: 100vh;
+        grid-column: 1/span 1;
+
+        background-color: $color--primary--blue;
+
+        padding: 5rem;
+        display: grid;
+        grid-template-rows: minmax(15rem, 10vh) 1fr;
+    }
+    &__logo {}
+    &__website {
+        color: $color--white;
+        font-size: 1.6rem;
+
+        font-weight: 300;
+        line-height: 1.6;
+    }
+    &__text {
+        color: $color--white;
+    }
+    &__heading {
+        font-size: 3.6rem;
+    }
+    &__p {
+        padding-top: 3rem;
+        font-size: 1.6rem;
+        font-weight: 200;
+    }
+
+
+
+
+    &__right {
+        height: 100vh;
+        grid-column: 2/-1;
+
+        background-color: $color--primary--white;
+        padding: 11rem;
+
+        display: grid;
+        grid-template-rows: repeat(4, max-content);
+        grid-template-columns: minmax(min-content, max-content);
+        row-gap: 2rem;
+    }
+    &__tertiary {
+        font-size: 3rem;
+        font-weight: 400;
+        color: darken($color--primary--black, 10);
+    }
+    &__pr {
+        font-size: 1.6rem;
+        font-weight: 300;
+        color: darken($color--primary--black, 10);
+        padding-bottom: 5rem;
+    }
+    &__button {
+        width: 35rem;
+        height: 8rem;
+
+        background-color: $color--white;
+        border: none;
+        border-radius: $default-radius;
+
+        outline: none;
+
+        font-family: $font--primary;
+        cursor: pointer;
+
+        svg {
+            display: inline-block;
+            float: left;
+            width: 5rem;
+            height: 5rem;
+            // padding-left: 3rem;
+
+            fill: $color--primary--blue;
+
+            padding: 1rem;
+
+            margin-left: 3rem;
+            margin-right: 3rem;
+            border-radius: $default-radius;
+            border: 1px solid $color--primary--blue ;
+        }
+        p {
+          display: block;
+          text-align: left;
+          padding-top: .7rem;
+
+          text-transform: uppercase;
+
+          color: darken($color--primary--black, 10);
+
+        }
+        span {
+            display: block;
+            text-align: left;
+            padding-top: .5rem;
+            color: lighten($color--primary--black, 5);
+        }
+    }
+}
