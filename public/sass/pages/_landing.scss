@@ -12,9 +12,13 @@
 
     &__left {
         height: 100vh;
-        grid-column: 1/span 1;
+        grid-column: 1/2;
 
+        //  background-image: linear-gradient(rgba($color--primary--blue, .8), rgba($color--primary--blue, .8)), url('../img/bg.jpeg');
         background-color: $color--primary--blue;
+
+        background-size: cover;
+        background-position: center;
 
         padding: 5rem;
         display: grid;
@@ -54,6 +58,9 @@
         grid-template-rows: repeat(4, max-content);
         grid-template-columns: minmax(min-content, max-content);
         row-gap: 2rem;
+
+        // display: none;
+
     }
     &__tertiary {
         font-size: 3rem;
@@ -78,6 +85,7 @@
 
         font-family: $font--primary;
         cursor: pointer;
+        position: relative;
 
         svg {
             display: inline-block;
@@ -110,6 +118,22 @@
             text-align: left;
             padding-top: .5rem;
             color: lighten($color--primary--black, 5);
+        }
+        &:hover {
+            border: 1px solid $color--primary--blue ;
+            background-color: lighten($color--primary--blue, 45);
+
+            &::after {
+                content: "→";
+                position: absolute;
+                top: 50%;
+                right: 2rem;
+
+                color: $color--primary--blue;
+                font-size: 2rem;
+
+                transform: translateY(-50%);
+            }
         }
     }
 }
