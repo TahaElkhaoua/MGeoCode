@@ -1,0 +1,2 @@
+# MGeoCode
+Moroccan geolocation API.
