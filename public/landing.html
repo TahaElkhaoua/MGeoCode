@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="landing__container">
+    <input type="checkbox" class="checkbox-hack" id="show" name="show">
     <div class="landing__left">
         <div class="landing__logo">
             <h3 class="landing__website">MGeo<span class="u-blue-light">Code</span></h3>
@@ -15,21 +16,75 @@
             <h2 class="landing__heading">Moroccan geolocation API.</h2>
             <p class="landing__p u-blue-light">Get Moroccan geolocation services, expanding multiple Moroccan cities.</p>
         </div>
+        <label class="landing__label" for="show"><a  class="landing__show-more">Get Started</a></label>
     </div>
 
     <div class="landing__right">
         <h3 class="landing__tertiary">Get started with few simple steps!</h3>
         <p class="landing__pr">Create your account or log in to get your unique API key <br/>and start sending requests.</p>
-        <button class="landing__button">
+        <button class="landing__button" id="login-btn">
             <svg>
                 <use xlink:href="/img/icons.svg#password"></use>
             </svg>
             <p>Log in</p><span>Already have an account?</span></button>
-        <button class="landing__button">
+        <button class="landing__button" id="register-btn">
             <svg>
                 <use xlink:href="/img/icons.svg#notes"></use>
             </svg>
             <p>Sign up</p><span>You don't have an account?</span></button>
     </div>
+
+    <div class="landing__register">
+        <button class="exit" onclick="exit()">X</button>
+        <h3 class="landing__tertiary">Create you free account</h3>
+        <p class="landing__pr">Fill out your information</p>
+    <form action="#" class="register form" autocomplete="off">
+            <div class="form__contain">
+                <input  autocomplete="new-password" type="text" class="form__control" placeholder="First name">
+                <label for="">First name</label>
+            </div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="text" class="form__control" placeholder="Last name">
+                <label for="">Last name</label>
+            </div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="text" class="form__control" placeholder="Address">
+                <label for="">Address</label>
+            </div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="text" class="form__control" placeholder="Phone number">
+                <label for="">Phone number</label>
+            </div>
+            <div class="form__seperator"></div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="email" class="form__control" placeholder="Email">
+                <label for="">Email</label>
+            </div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="password" class="form__control" placeholder="password">
+                <label for="">Password</label>
+            </div>
+            <input type="submit" class="form__control" value="register">
+        </form>
+    </div>
+
+    <div class="landing__login">
+        <button class="exit" onclick="exit()">X</button>
+        <h3 class="landing__tertiary">Login to your account</h3>
+        <p class="landing__pr">Fill out your information</p>
+    <form action="#" class="login form" autocomplete="off">
+            <div class="form__contain">
+                <input autocomplete="new-password" type="email" class="form__control" placeholder="Email">
+                <label for="">Email</label>
+            </div>
+            <div class="form__contain">
+                <input autocomplete="new-password" type="password" class="form__control" placeholder="password">
+                <label for="">Password</label>
+            </div>
+            <input type="submit" class="form__control" value="register">
+        </form>
+    </div>
+
+    <script type="text/javascript" src="/js/main.js" defer></script>
 </body>
 </html>

@@ -5,16 +5,22 @@
 
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        position: relative;
+
+        overflow: hidden;
     }
 
 
-
-
+//LEFT SIDE
     &__left {
         height: 100vh;
-        grid-column: 1/2;
+        width: 100vw;
+        position: absolute;
+        // grid-column: 1/2;
 
-        //  background-image: linear-gradient(rgba($color--primary--blue, .8), rgba($color--primary--blue, .8)), url('../img/bg.jpeg');
+        z-index: 999;
+
+         background-image: linear-gradient(to bottom right, rgba($color--primary--blue, .8), rgba($color--primary--blue--dark, .8)), url('../img/bg.jpeg');
         background-color: $color--primary--blue;
 
         background-size: cover;
@@ -22,8 +28,11 @@
 
         padding: 5rem;
         display: grid;
-        grid-template-rows: minmax(15rem, 10vh) 1fr;
+        grid-template-rows: minmax(15rem, 10vh) max-content 1fr;
+    
+        transition: $default--animation;
     }
+
     &__logo {}
     &__website {
         color: $color--white;
@@ -34,6 +43,9 @@
     }
     &__text {
         color: $color--white;
+        justify-self: center;
+
+        // margin-top: 10rem;
     }
     &__heading {
         font-size: 3.6rem;
@@ -43,24 +55,55 @@
         font-size: 1.6rem;
         font-weight: 200;
     }
+    &__label {
+
+        display: block;
+
+        justify-self: center;
+        align-self: flex-start;
+
+        margin-top: 7rem;
+        cursor: pointer;
+    }
+    &__show-more {
+
+        padding: 2rem 10rem;
+
+        background-color: $color--teal--light;
+        border: none;
+        outline: none;
+
+        color: $color--white;
+
+        // cursor: pointer;
+
+        font-family: $font--primary;
+        font-weight: 400;
+    }
 
 
 
-
+//RIGHT SIDE
     &__right {
-        height: 100vh;
-        grid-column: 2/-1;
+        @extend %right-side;
+        position: relative;
+        transition: $default--animation;
+        position: relative;
+        &--push {
+            &::after {
+                content: "";
+                width: 100%;
+                height: 100%;
 
-        background-color: $color--primary--white;
-        padding: 11rem;
+                position: absolute;
+                left: 0;
+                top: 0;
+                
+                background-color: rgba($color--black, .8);
 
-        display: grid;
-        grid-template-rows: repeat(4, max-content);
-        grid-template-columns: minmax(min-content, max-content);
-        row-gap: 2rem;
-
-        // display: none;
-
+                animation: $default--animation--value slideRight .5s;
+            }
+        }
     }
     &__tertiary {
         font-size: 3rem;
@@ -136,4 +179,38 @@
             }
         }
     }
+
+    &__register, &__login {
+        @extend %right-side;
+        justify-content: center;
+
+        position: absolute;
+
+        display: none;
+        transition: $default--animation;
+
+        right: 0;
+        &--show {
+            display: block;
+            animation: $default--animation--value slideRight .5s;
+        }
+    }
+}
+
+.checkbox-hack {
+    display: none;
+}
+.checkbox-hack:checked ~ .landing__left {
+    width: 100%;
+    position: relative;
+    grid-column: 1/2;
+
+    background-image: linear-gradient(to bottom right, rgba($color--primary--blue, 1), rgba($color--primary--blue--dark, 1));
+    z-index: -1;
+}
+.checkbox-hack:checked ~ .landing__right {
+    // display: grid;
+}
+.checkbox-hack:checked ~ .landing__left > .landing__label {
+    display: none;
 }

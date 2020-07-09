@@ -1,0 +1,18 @@
+@keyframes dropdown {
+    0% {
+        transform: translateY(-3.2rem);
+        font-size: 1.3rem;
+    }
+    100% {
+        transform: translateY(0);
+        font-size: 1rem;
+    }
+}
+@keyframes slideRight {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

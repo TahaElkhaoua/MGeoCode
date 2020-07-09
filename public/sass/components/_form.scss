@@ -1,0 +1,51 @@
+.form {
+
+    &__contain {
+        width: 100%;
+
+        label {
+            display: block;
+            margin-left: 3rem;
+
+            font-size: 1.3rem;
+            display: none;
+        }
+        margin-bottom: 1.5rem;
+    }
+    &__control {
+        display: block;
+        width: 100%;
+
+        padding: 1rem 3rem;
+        margin-bottom: 1rem;
+        // border: none;
+
+
+        &[type="text"], &[type="password"], &[type="email"]{
+
+            background-color: $color--white;
+            border: none;
+            border-radius: $default-radius;
+    
+            outline: none;
+    
+            font-family: $font--primary;
+
+            &:focus::placeholder {
+                visibility: hidden;
+                display: none;
+            }
+            &:focus + label {
+                display: block;
+                animation: cubic-bezier(0.215, 0.610, 0.355, 1) .2s dropdown forwards;
+            }
+        }
+        &[type="submit"]{
+            background-color: $color--teal--light;
+            color: $color--white;
+
+            border: none;
+            cursor: pointer;
+        }
+    }
+}

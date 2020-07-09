@@ -1,9 +1,18 @@
-$color--primary--blue: #015eff;
+// $color--primary--blue: #015eff;
+
+$color--primary--blue: #54a0ff;
+$color--primary--blue--dark : #2e86de;
+
 $color--primary--white: #f5f6f9;
 $color--primary--black: #4b4d61;
 
+$color--teal--light: #1dd1a1;
+
 $color--white: white;
+$color--black: black;
 
 $font--primary: 'Rubik', sans-serif;
 
 $default-radius: 5px;
+$default--animation--value: cubic-bezier(0.215, 0.610, 0.355, 1);
+$default--animation: all .5s $default--animation--value;

@@ -1,6 +1,48 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap");
+.landing__right, .landing__register, .landing__login {
+  overflow: hidden;
+  height: 100vh;
+  grid-column: 2/-1;
+  background-color: #f5f6f9;
+  padding: 11rem;
+  display: grid;
+  grid-template-rows: repeat(4, max-content);
+  grid-template-columns: minmax(min-content, max-content);
+  row-gap: 2rem;
+  z-index: 2;
+  box-shadow: 0 0 3rem rgba(75, 77, 97, 0.3);
+  grid-row: 1/-1;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .landing__right .exit, .landing__register .exit, .landing__login .exit {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    font-size: 3rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: .5rem;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1); }
+    .landing__right .exit:hover, .landing__register .exit:hover, .landing__login .exit:hover {
+      transform: rotate(180deg); }
+
+@keyframes dropdown {
+  0% {
+    transform: translateY(-3.2rem);
+    font-size: 1.3rem; }
+  100% {
+    transform: translateY(0);
+    font-size: 1rem; } }
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(100%); }
+  100% {
+    transform: translateY(0); } }
+
 *,
 *::before,
 *::after {
@@ -14,23 +56,61 @@ html {
   box-sizing: border-box; }
 
 .u-blue-light {
-  color: #cddfff; }
+  color: white; }
+
+.form__contain {
+  width: 100%;
+  margin-bottom: 1.5rem; }
+  .form__contain label {
+    display: block;
+    margin-left: 3rem;
+    font-size: 1.3rem;
+    display: none; }
+
+.form__control {
+  display: block;
+  width: 100%;
+  padding: 1rem 3rem;
+  margin-bottom: 1rem; }
+  .form__control[type="text"], .form__control[type="password"], .form__control[type="email"] {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-family: "Rubik", sans-serif; }
+    .form__control[type="text"]:focus::placeholder, .form__control[type="password"]:focus::placeholder, .form__control[type="email"]:focus::placeholder {
+      visibility: hidden;
+      display: none; }
+    .form__control[type="text"]:focus + label, .form__control[type="password"]:focus + label, .form__control[type="email"]:focus + label {
+      display: block;
+      animation: cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s dropdown forwards; }
+  .form__control[type="submit"] {
+    background-color: #1dd1a1;
+    color: white;
+    border: none;
+    cursor: pointer; }
 
 .landing__container {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); }
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  overflow: hidden; }
 
 .landing__left {
   height: 100vh;
-  grid-column: 1/2;
-  background-color: #015eff;
+  width: 100vw;
+  position: absolute;
+  z-index: 999;
+  background-image: linear-gradient(to bottom right, rgba(84, 160, 255, 0.8), rgba(46, 134, 222, 0.8)), url("../img/bg.jpeg");
+  background-color: #54a0ff;
   background-size: cover;
   background-position: center;
   padding: 5rem;
   display: grid;
-  grid-template-rows: minmax(15rem, 10vh) 1fr; }
+  grid-template-rows: minmax(15rem, 10vh) max-content 1fr;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1); }
 
 .landing__website {
   color: white;
@@ -39,7 +119,8 @@ html {
   line-height: 1.6; }
 
 .landing__text {
-  color: white; }
+  color: white;
+  justify-self: center; }
 
 .landing__heading {
   font-size: 3.6rem; }
@@ -49,15 +130,35 @@ html {
   font-size: 1.6rem;
   font-weight: 200; }
 
+.landing__label {
+  display: block;
+  justify-self: center;
+  align-self: flex-start;
+  margin-top: 7rem;
+  cursor: pointer; }
+
+.landing__show-more {
+  padding: 2rem 10rem;
+  background-color: #1dd1a1;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400; }
+
 .landing__right {
-  height: 100vh;
-  grid-column: 2/-1;
-  background-color: #f5f6f9;
-  padding: 11rem;
-  display: grid;
-  grid-template-rows: repeat(4, max-content);
-  grid-template-columns: minmax(min-content, max-content);
-  row-gap: 2rem; }
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  position: relative; }
+  .landing__right--push::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: cubic-bezier(0.215, 0.61, 0.355, 1) slideRight 0.5s; }
 
 .landing__tertiary {
   font-size: 3rem;
@@ -85,12 +186,12 @@ html {
     float: left;
     width: 5rem;
     height: 5rem;
-    fill: #015eff;
+    fill: #54a0ff;
     padding: 1rem;
     margin-left: 3rem;
     margin-right: 3rem;
     border-radius: 5px;
-    border: 1px solid #015eff; }
+    border: 1px solid #54a0ff; }
   .landing__button p {
     display: block;
     text-align: left;
@@ -103,13 +204,36 @@ html {
     padding-top: .5rem;
     color: #56586f; }
   .landing__button:hover {
-    border: 1px solid #015eff;
-    background-color: #e7efff; }
+    border: 1px solid #54a0ff;
+    background-color: white; }
     .landing__button:hover::after {
       content: "→";
       position: absolute;
       top: 50%;
       right: 2rem;
-      color: #015eff;
+      color: #54a0ff;
       font-size: 2rem;
       transform: translateY(-50%); }
+
+.landing__register, .landing__login {
+  justify-content: center;
+  position: absolute;
+  display: none;
+  transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  right: 0; }
+  .landing__register--show, .landing__login--show {
+    display: block;
+    animation: cubic-bezier(0.215, 0.61, 0.355, 1) slideRight 0.5s; }
+
+.checkbox-hack {
+  display: none; }
+
+.checkbox-hack:checked ~ .landing__left {
+  width: 100%;
+  position: relative;
+  grid-column: 1/2;
+  background-image: linear-gradient(to bottom right, #54a0ff, #2e86de);
+  z-index: -1; }
+
+.checkbox-hack:checked ~ .landing__left > .landing__label {
+  display: none; }
