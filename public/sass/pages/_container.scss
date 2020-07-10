@@ -1,0 +1,74 @@
+.container {
+        width : 100vw;
+        height: 100vh;
+
+        display: grid;
+        grid-template-columns: minmax(40rem, 30%) minmax(40rem,1fr);
+        position: relative;
+
+        overflow: hidden;
+
+
+//LEFT SIDE
+    &__left {
+        height: 100vh;
+        grid-column: 1/2;
+
+        width: 100%;
+
+        z-index: 999;
+        //  background-image: linear-gradient(to bottom right, rgba($color--primary--blue, .8), rgba($color--primary--blue--dark, .8)), url('../img/bg.jpeg');
+         background-image: linear-gradient(to bottom right, rgba($color--primary--blue, 1), rgba($color--primary--blue--dark, 1));
+
+        background-size: cover;
+        background-position: center;
+
+        padding: 5rem;
+        display: grid;
+        grid-template-rows: minmax(15rem, 10vh) max-content 1fr;
+    
+        // transition: $default--animation;
+
+        box-shadow: 0 0 5rem rgba($color--black, .5);
+    }
+
+    &__logo {}
+    &__website {
+        color: $color--white;
+        font-size: 1.6rem;
+
+        font-weight: 300;
+        line-height: 1.6;
+    }
+    &__text {
+        color: $color--white;
+        justify-self: center;
+
+        // margin-top: 10rem;
+    }
+    &__heading {
+        font-size: 3.6rem;
+    }
+    &__p {
+        padding-top: 3rem;
+        font-size: 1.6rem;
+        font-weight: 200;
+    }
+
+
+
+
+
+    //The Main Content Of The Page
+    &__content {
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+}

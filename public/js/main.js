@@ -1,23 +1,42 @@
-(function(win, doc){
-
-    doc.querySelector('#login-btn').onclick = function(){
-        doc.querySelector('.landing__right').classList.add('landing__right--push');
-        doc.querySelector('.landing__login').classList.add('landing__login--show');
-        doc.querySelector('.landing__register').classList.remove('landing__register--show');
-  
+(function(win, doc, mapster){
+    var options =  {
+        center: {lat : 33.351177, lng : -7.577820}, //Casa Center
+        zoom: 11,
+        disableDefaultUI: true
     };
+    var element = document.querySelector('.map');
+    var map = mapster.create(element,options);
+
     
-    doc.querySelector('#register-btn').onclick = function(){
-        doc.querySelector('.landing__right').classList.add('landing__right--push');
-        doc.querySelector('.landing__register').classList.add('landing__register--show');
-        doc.querySelector('.landing__login').classList.remove('landing__login--show');
-    };
-    
-    win.exit = function(){
-        doc.querySelector('.landing__login').classList.remove('landing__login--show');
-        doc.querySelector('.landing__register').classList.remove('landing__register--show');
-        doc.querySelector('.landing__right').classList.remove('landing__right--push');
 
-    };
+    map.addPoly(win.casaPoly.getArr());
 
-})(window, document);
+
+
+    // var marker = map.addMarker({
+    //     id: 66,
+    //     lat: 38,
+    //     lng: -122,
+    //     content: 'Hello It s the web',
+    //     event: {
+    //         name: 'click',
+    //         callback: function(e){
+    //         }
+    //     }
+    // });
+
+    // for(var i = 0;i<50;i++){
+    //     map.addMarker({
+    //         id: i,
+    //         lat: 38 + Math.random(),
+    //         lng: -122 + Math.random(),
+    //         content: 'Hello It s the web',
+    //     });
+    // }
+    // var found = map.findBy(function(marker){
+        // return marker.id === 2;
+    // });
+    // map._removeMarker(marker);
+
+
+})(window, document, window.Mapster || (window.Mapster = {}));
