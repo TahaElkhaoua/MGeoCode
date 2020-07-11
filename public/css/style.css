@@ -250,7 +250,7 @@ html {
     grid-column: 1/2;
     width: 100%;
     z-index: 999;
-    background-image: linear-gradient(to bottom right, #54a0ff, #2e86de);
+    background-image: linear-gradient(to bottom right, #0053ba, #103a63);
     background-size: cover;
     background-position: center;
     padding: 5rem;

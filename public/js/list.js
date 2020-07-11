@@ -33,6 +33,14 @@
                     action.call(this, matches);
                 }
                 return matches;
+            },
+            addToStart: function(item){
+                this.items = [item].concat(this.items);
+            },
+            actionOnAll: function(callback){
+                this.items.forEach(function(item){
+                    callback(item);
+                });
             }
         }
         return list;

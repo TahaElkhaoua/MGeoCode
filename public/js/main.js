@@ -1,17 +1,32 @@
 (function(win, doc, mapster){
     var options =  {
-        center: {lat : 33.351177, lng : -7.577820}, //Casa Center
-        zoom: 11,
-        disableDefaultUI: true
-    };
+        center: {lat : 33.5803154,lng: -7.6036127}, //Casa Center
+        zoom: 12,
+        disableDefaultUI: true,
+        styles: win.mapStyle2
+        };
     var element = document.querySelector('.map');
     var map = mapster.create(element,options);
 
+    var casaPolyHandler = new PolyHandler(
+        new LatLng(33.5803154,-7.6036127),
+        .001,.0008
+    );
+
+    // map.addPoly(win.casaPoly.getArr());
+    casaPolyHandler.createGrid(win.casaPoly.getArr()).getArr().forEach(function(latArr){
+        latArr.getArr().forEach(function(rect){
+            map.addPoly(rect.getPath(), function(e){
+                console.log(rect);
+            });
+        });
+    });
+    win.find = function(lat, lng){
+        console.log(casaPolyHandler.findZone(new LatLng(lat, lng)));
+    }
+
+
     
-
-    map.addPoly(win.casaPoly.getArr());
-
-
 
     // var marker = map.addMarker({
     //     id: 66,
