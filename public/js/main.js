@@ -13,17 +13,60 @@
         .001,.0008
     );
 
+    // casaPolyHandler.createGrid(win.casaPoly.getArr());
+    var casaCity = new CityMap(casaPolyHandler);
+    // casaCity.createId();
+    // casaCity.storeInDatabase('5f0bcf5ba7e2dd47788ecb21');
+    casaCity.retrieveFromDatabase('5f0bcf5ba7e2dd47788ecb21');
+
     // map.addPoly(win.casaPoly.getArr());
-    casaPolyHandler.createGrid(win.casaPoly.getArr()).getArr().forEach(function(latArr){
-        latArr.getArr().forEach(function(rect){
-            map.addPoly(rect.getPath(), function(e){
-                console.log(rect);
-            });
-        });
-    });
-    win.find = function(lat, lng){
-        console.log(casaPolyHandler.findZone(new LatLng(lat, lng)));
-    }
+    // var i = 0;
+    // casaPolyHandler.createGrid(win.casaPoly.getArr()).getArr().forEach(function(latArr){
+    //     i++;
+    //     latArr.getArr().forEach(function(rect){
+    //         map.addPoly(rect.getPath());
+    //         database.ref('Casa/'+i+'/'+rect.gsId()).set(rect.toObj());
+    //     });
+    // });
+
+    // var total = new List();
+    // database.ref('Casa').once('value', function(snapshot){
+    //     snapshot.forEach(function(snapshotChild){
+    //         var part = new List();
+    //         snapshotChild.forEach(function(actualChild){
+    //             var obj = actualChild.val();
+
+    //             part.add( new Rect(new LatLng(obj.center.lat, obj.center.lng),
+    //             [new LatLng(obj.leftBot.lat, obj.leftBot.lng),
+    //                  new LatLng(obj.rightBot.lat, obj.rightBot.lng),
+    //                  new LatLng(obj.rightTop.lat, obj.rightTop.lng),
+    //                  new LatLng(obj.leftTop.lat, obj.leftTop.lng)],
+    //             obj.id,
+    //             obj.alias
+    //         ));
+
+    //         });
+    //         total.add(part);
+    //     });
+    // });
+
+    // casaPolyHandler = new PolyHandler(
+    //     new LatLng(33.5803154,-7.6036127),
+    //     .001,.0008,
+    //     total
+    // );
+
+    // win.draw = function(){
+    //     casaPolyHandler.getArr().getArr().forEach(function(anotherArr){
+    //         anotherArr.getArr().forEach(function(rect){
+    //             map.addPoly(rect.getPath());
+    //         });
+    //     });
+    // }
+    
+    // win.find = function(lat, lng){
+    //     console.log(casaPolyHandler.findZone(new LatLng(lat, lng)));
+    // }
 
 
     

@@ -29,6 +29,17 @@
                 if(alias)
                     return this.alias = alias;
                 return this.alias;
+            },
+            toObj: function(){
+                return {
+                    id: this.id,
+                    alias: this.alias || "",
+                    center: this.center,
+                    leftBot: this.leftBot,
+                    rightBot: this.rightBot,
+                    rightTop: this.rightTop,
+                    leftTop: this.leftTop
+                };
             }
         }
 

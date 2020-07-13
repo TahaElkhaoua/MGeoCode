@@ -76,7 +76,9 @@
                     fillColor: '#54a0ff',
                     fillOpacity: .3
                   });
+                  if(action)
                   google.maps.event.addListener(poly, 'click', action);
+
                   poly.setMap(this.gMap);
                   return poly;
             }

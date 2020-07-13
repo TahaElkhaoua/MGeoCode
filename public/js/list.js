@@ -1,8 +1,8 @@
 (function(win, doc){
 
     var List = (function(){
-        function list(params){
-            this.items = [];
+        function list(params, list){
+            this.items = list || [];
         }
         list.prototype = {
             getArr: function(){

@@ -3,11 +3,11 @@
     // An Object Model to hold all poly Rectangles objects of a city 
     // starting from the center [Any point can be used]
     var PolyHandler = (function(){
-        function PolyHandler(center, latDiff, lngDiff){
+        function PolyHandler(center, latDiff, lngDiff, multiArr){
             this.center = center;
             this.latDiff = latDiff;
             this.lngDiff = lngDiff;
-            this.rects = new List(); //multidimensional Array
+            this.rects = multiArr || new List(); //multidimensional Array
         }
         PolyHandler.prototype = {
             //Create A Rectangle from center
@@ -100,8 +100,17 @@
                         });
                     });
                     return finalRect;
+            },
+            getArr: function(){
+                return this.rects;
+            },
+            applyActionSep: function(action){
+                this.rects.actionOnAll(function(latArr){
+                    latArr.actionOnAll(function(rect){
+                        action(rect);
+                    });
+                });
             }
-            
         }
 
         return PolyHandler;
