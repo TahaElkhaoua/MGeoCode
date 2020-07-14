@@ -3,9 +3,17 @@ const mongoose = require('mongoose');
 //ADD DATABASE CONNECTION
 require('./database/mongoose');
 
+//SERVER 
 const express = require('express');
 const app = express();
-const cors = require('cors');
+
+const session = require('express-session');
+const flash = require('express-flash');
+const passport = require('passport');
+
+
+//SEREVR VIEWS
+const ejsMate = require('ejs-mate');
 
 const port = process.env.PORT || 5000;
 
@@ -14,12 +22,29 @@ const Grid = require('./models/Grid');
 
 const publicPath = path.join(__dirname, 'public');
 
+app.engine('ejs', ejsMate);
 
+app.set('view engine', 'ejs');
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(flash());
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'Secret',
+    cookie: {secure: false}
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', require('./routes/main'));
 
 
+
+
+
+//[TESTING PURPOSES ROUTES]
 app.post('/create-grid', async (req, res)=>{
 
     const grid = new Grid();

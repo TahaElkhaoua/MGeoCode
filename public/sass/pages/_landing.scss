@@ -214,3 +214,14 @@
 .checkbox-hack:checked ~ .landing__left > .landing__label {
     display: none;
 }
+
+.alert {
+
+    text-align: center;
+    font-size: 1.4rem;
+    padding-top: 1rem;
+
+    &-danger {
+        color: lightcoral;
+    }
+}

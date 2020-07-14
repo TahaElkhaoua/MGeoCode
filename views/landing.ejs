@@ -40,28 +40,28 @@
         <p class="landing__pr">Fill out your information</p>
     <form action="#" class="register form" autocomplete="off">
             <div class="form__contain">
-                <input  autocomplete="new-password" type="text" class="form__control" placeholder="First name">
+                <input  autocomplete="new-password" type="text" name="fName" id="fName" class="form__control" placeholder="First name">
                 <label for="">First name</label>
             </div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="text" class="form__control" placeholder="Last name">
+                <input autocomplete="new-password" type="text" name="lName" id="lName" class="form__control" placeholder="Last name">
                 <label for="">Last name</label>
             </div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="text" class="form__control" placeholder="Address">
+                <input autocomplete="new-password" type="text" name="address" id="address" class="form__control" placeholder="Address">
                 <label for="">Address</label>
             </div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="text" class="form__control" placeholder="Phone number">
+                <input autocomplete="new-password" type="text" name="phone" id="phone" class="form__control" placeholder="Phone number">
                 <label for="">Phone number</label>
             </div>
             <div class="form__seperator"></div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="email" class="form__control" placeholder="Email">
+                <input autocomplete="new-password" type="email" name="email" id="email" class="form__control" placeholder="Email">
                 <label for="">Email</label>
             </div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="password" class="form__control" placeholder="password">
+                <input autocomplete="new-password" type="password" name="password" id="password" class="form__control" placeholder="password">
                 <label for="">Password</label>
             </div>
             <input type="submit" class="form__control" value="register">
@@ -72,16 +72,18 @@
         <button class="exit" onclick="exit()">X</button>
         <h3 class="landing__tertiary">Login to your account</h3>
         <p class="landing__pr">Fill out your information</p>
-    <form action="#" class="login form" autocomplete="off">
+    <form action="/login" method="POST" class="login form" autocomplete="off">
             <div class="form__contain">
-                <input autocomplete="new-password" type="email" class="form__control" placeholder="Email">
+                <input autocomplete="new-password" id="lEmail" name="email" type="email" class="form__control" placeholder="Email">
                 <label for="">Email</label>
             </div>
             <div class="form__contain">
-                <input autocomplete="new-password" type="password" class="form__control" placeholder="password">
+                <input autocomplete="new-password" id="lPassword" type="password" name="password" class="form__control" placeholder="password">
                 <label for="">Password</label>
             </div>
             <input type="submit" class="form__control" value="register">
+
+            <p class="alert alert-danger failed-login-text"></p>
         </form>
     </div>
 
