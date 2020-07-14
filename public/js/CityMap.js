@@ -1,3 +1,4 @@
+
 (function(win){
 
     var CityMap = (function(){
@@ -22,37 +23,68 @@
                 var line = -1;
                 this.polyHandler.getArr().getArr().forEach(function(latArr){
                     line++;
-                    latArr.getArr().forEach(function(rect){
-                        i++;
-                        const r = {
-                            idAlias : i,  
-                            leftBot :rect.leftBot.gsLL(),
-                            rightBot:rect.rightBot.gsLL(),
-                            rightTop :rect.rightTop.gsLL(),
-                            leftTop :rect.leftTop.gsLL()
-                        }
-
-                        var forD = new FormData();
-                        forD.append("data", "Hi");
+                    // [CREATE ITEM BY ITEM PROVIDES A WAY TO ADD ID KEYS]
+                    // latArr.getArr().forEach(function(rect){
+                    //     i++;
+                    //     var data = new URLSearchParams();
+                    //     // data.append('idAlias' , i);
+                    //     // data.append('leftBot' ,{lat:rect.leftBot.lat, lng:rect.leftBot.lng});
+                    //     // data.append('rightBot',rect.rightBot);
+                    //     // data.append('rightTop' ,rect.rightTop);
+                    //     // data.append('leftTop' ,rect.leftTop);
                         
-                        var xml = new XMLHttpRequest();
-                        xml.open("post", '/create-grid/'+(id || this.id)+'/'+line);
-                        xml.setRequestHeader('Content-Type', 'application/json');
-                        xml.send(JSON.stringify(r));
-                    })
+                    //     rect.id = i;
+                    //     data.append('obj', JSON.stringify(rect));
+
+                    //     fetch('/create-grid/'+(id || this.id)+'/'+line, {
+                    //         method: 'POST',
+                    //         body: data
+                    //     }).then(function(res){
+                    //         if(res.ok){
+                    //             res.text().then(function(text){
+                    //                 console.log(text);
+                    //             });
+                    //         }
+                    //     }).catch(function(err){
+                    //         console.log(err);
+                    //     });
+
+
+                    // });
+
+                    //[ADD BY ARRAY NEED TO LOOP THROUGH ITEMS TO ADD ID KEYS]
+                    var data = new URLSearchParams();
+                    data.append('data', JSON.stringify(latArr.getArr()));
+                    fetch('/create-grid-lat/'+(id || this.id)+'/'+line, {
+                                method: 'POST',
+                                body: data,
+                            }).then(function(res){
+                                if(res.ok){
+                                    res.text().then(function(text){
+                                        console.log(text);
+                                    });
+                                }
+                            });
+
                 });
             },
             retrieveFromDatabase: function(id){
-                var xml = new XMLHttpRequest();
-                xml.open("post", '/get-grid/'+(id || this.id));
-                xml.setRequestHeader('Content-Type', 'application/json');
-                xml.send();
+                // var xml = new XMLHttpRequest();
+                // xml.open("post", '/get-grid/'+(id || this.id));
+                // xml.setRequestHeader('Content-Type', 'application/json');
+                // xml.send();
 
-                xml.onreadystatechange = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        // document.body.innerHTML=    ( this.responseText);
-                    }
-                }
+              fetch("/get-grid/"+(id || this.id), {
+                  method: 'POST'
+              }).then(function(res){
+                  if(res.ok){
+                      res.json().then(function(data){
+                        console.log(data);
+                      });
+                  }else{
+                      console.log("ERROR");
+                  }
+              });
             }
 
         }

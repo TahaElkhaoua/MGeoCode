@@ -59,12 +59,24 @@ app.post('/create-grid/:id/:line', async (req, res)=>{
         return res.status(404).send();
 
         let arr = grid.coords[req.params.line] || [];
-        arr.push(req.body);
+        arr.push(JSON.parse(req.body.obj));
 
         if(grid.coords[req.params.line])
             grid.coords[req.params.line] = arr;
         else
             grid.coords.push(arr);
+
+
+        await grid.save();
+    res.send('success');
+});
+
+app.post('/create-grid-lat/:id/:line', async (req, res)=>{
+    const grid = await Grid.findOne({_id:  (req.params.id)});
+    if(!grid)
+        return res.status(404).send();
+
+        grid.coords.push(JSON.parse(req.body.data));
 
 
         await grid.save();

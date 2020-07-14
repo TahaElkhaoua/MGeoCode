@@ -14,10 +14,10 @@
         Rect.prototype = {
             getPath: function(){
                 return [
-                    (this.leftBot).gsLL(),
-                    (this.rightBot).gsLL(),
-                    (this.rightTop).gsLL(),
-                    (this.leftTop).gsLL()
+                    (this.leftBot),
+                    (this.rightBot),
+                    (this.rightTop),
+                    (this.leftTop)
                 ];
             },
             gsId: function(id){

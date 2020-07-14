@@ -9,15 +9,15 @@
     var map = mapster.create(element,options);
 
     var casaPolyHandler = new PolyHandler(
-        new LatLng(33.5803154,-7.6036127),
+        {lat: 33.5803154,lng : -7.6036127},
         .001,.0008
     );
 
     // casaPolyHandler.createGrid(win.casaPoly.getArr());
     var casaCity = new CityMap(casaPolyHandler);
     // casaCity.createId();
-    // casaCity.storeInDatabase('5f0bcf5ba7e2dd47788ecb21');
-    casaCity.retrieveFromDatabase('5f0bcf5ba7e2dd47788ecb21');
+    // casaCity.storeInDatabase('5f0de67bf530762d6838a9e3');
+    // casaCity.retrieveFromDatabase('5f0de67bf530762d6838a9e3');
 
     // map.addPoly(win.casaPoly.getArr());
     // var i = 0;
