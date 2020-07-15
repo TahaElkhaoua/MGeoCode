@@ -71,10 +71,10 @@
                 var poly = new google.maps.Polygon({
                     paths: path,
                     strokeColor: '#FFF',
-                    strokeOpacity: 0.8,
+                    strokeOpacity: 0.3,
                     strokeWeight: 1,
-                    fillColor: '#54a0ff',
-                    fillOpacity: .3
+                    fillColor: '#34495e',
+                    fillOpacity: .1
                   });
                   if(action)
                   google.maps.event.addListener(poly, 'click', action);

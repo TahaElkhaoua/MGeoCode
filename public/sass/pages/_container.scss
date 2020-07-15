@@ -3,7 +3,7 @@
         height: 100vh;
 
         display: grid;
-        grid-template-columns: minmax(40rem, 30%) minmax(40rem,1fr);
+        grid-template-columns: 5rem minmax(40rem,1fr);
         position: relative;
 
         overflow: hidden;
@@ -18,21 +18,24 @@
 
         z-index: 999;
         //  background-image: linear-gradient(to bottom right, rgba($color--primary--blue, .8), rgba($color--primary--blue--dark, .8)), url('../img/bg.jpeg');
-         background-image: linear-gradient(to bottom right, rgba(darken($color--primary--blue, 30), 1), rgba(darken($color--primary--blue--dark, 30), 1));
+        //  background-image: linear-gradient(to bottom right, rgba(darken($color--primary--blue, 30), 1), rgba(darken($color--primary--blue--dark, 30), 1));
+        background-color: #242830;
 
         background-size: cover;
         background-position: center;
 
-        padding: 5rem;
+        // padding: 5rem;
         display: grid;
         grid-template-rows: minmax(15rem, 10vh) max-content 1fr;
     
         // transition: $default--animation;
 
-        box-shadow: 0 0 5rem rgba($color--black, .5);
+        box-shadow: 0 0 5rem rgba($color--black, .1);
     }
 
-    &__logo {}
+    &__logo {
+        display: none;
+    }
     &__website {
         color: $color--white;
         font-size: 1.6rem;

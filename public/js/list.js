@@ -1,7 +1,7 @@
 (function(win, doc){
 
     var List = (function(){
-        function list(params, list){
+        function list(list){
             this.items = list || [];
         }
         list.prototype = {

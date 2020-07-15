@@ -11,25 +11,52 @@
         <div class="container__logo">
             <h3 class="container__website">MGeo<span class="u-blue-light">Code</span></h3>
         </div>
-        <ul class="menu">
+        <!-- <ul class="menu">
             <li class="menu__list"><button class="menu__btn">Select a city</button></li>
             <li class="menu__list"><button class="menu__btn">Configure your your account</button></li>
             <li class="menu__list"><button class="menu__btn">Integrate API</button></li>
             <li class="menu__list"><button class="menu__btn">account settings</button></li>
             <li class="menu__list"><button class="menu__btn">Generate your API key</button></li>
             <li class="menu__list"><button class="menu__btn">logout</button></li>
-        </ul>
+        </ul> -->
     </div>
 
     <!-- //Main Content -->
     <div class="container__right">
         <div class="container__content">
             <div class="map"></div>
+            <div class="options">
+                <div class="options__header">
+                    <div class="options__item u-text-center">
+                                    <div>#ID</div>
+                                    <div>CITY</div>
+                                    <div>STATUS</div>
+                                    <div>GENERATED GRIDS</div>
+                                    <div>CONFIG</div>
+                                    <div>STATS</div>
+                    </div>
+                </div>
+                <div class="options__content">
+                       <div class="options__item u-text-center">
+                            <div>5896</div>
+                            <div>Casablanca</div>
+                            <div>INACTIVE</div>
+                            <div>N/A</div>
+                            <div><input type="checkbox" id="casaCheck"><label for="casaCheck">Display grid</label></div>
+                            <div>CLICK</div>
+                            <div><label for="casa">DOWN</label></div>
+                       </div>
+                       <input type="checkbox" onchange="check(this, '#casaP')" class="options__toggle" id="casa" />
+                        <div class="options__conf" id="casaP">
+                            Hello World
+                        </div>
+                </div>
+        </div>
         </div>
     </div>
 
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpU9eD0WcmUBRg2COfc10JQaTBmAW8VZ0&libraries=geometry&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy70FRKC2tsqEXr-y15_ubkVVjE8q-EV0&libraries=geometry&v=weekly"
     defer
   ></script>
 

@@ -110,6 +110,9 @@
                         action(rect);
                     });
                 });
+            },
+            setRects: function(rects){
+                this.rects = rects;
             }
         }
 

@@ -1,5 +1,6 @@
 (function(win){
 
+    // /REFRACTORED TO NOT BE USED DUE TO DATABASE CONFLICTS AND BETTER PERFORMANCE
     var LatLng = (function(){
 
         function LatLng(lat, lng){
