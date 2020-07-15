@@ -27,29 +27,4 @@
         // }
     // });
 
-
-    // casaPolyHandler = new PolyHandler(
-    //     new LatLng(33.5803154,-7.6036127),
-    //     .001,.0008,
-    //     total
-    // );
-
-    // win.draw = function(){
-    //     casaPolyHandler.getArr().getArr().forEach(function(anotherArr){
-    //         anotherArr.getArr().forEach(function(rect){
-    //             map.addPoly(rect.getPath());
-    //         });
-    //     });
-    // }
-    
-
-    win.check = function(element, changer){
-        var ele = document.querySelector(changer);
-        if(ele.classList.contains('options__conf--show')){
-            return ele.classList.remove('options__conf--show');
-        }
-        ele.classList.add('options__conf--show');
-    }
-
-
 })(window, document, window.Mapster || (window.Mapster = {}));

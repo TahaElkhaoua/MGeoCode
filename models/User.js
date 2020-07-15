@@ -25,15 +25,30 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: Buffer
-    }
+    },
+    admin: {
+        type: Boolean,
+        default: 0
+    },
+    grids: [
+        {
+            city: {
+                type: mongoose.Types.ObjectId,
+                ref: 'City'
+            },
+            grid: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Grid'
+            }
+        }
+    ]
 }, {useTimeStamps: true});
 
 userSchema.pre('save', async function(next){
     const user = this;
-    if(user.isModified('password')){
+    if(user.isModified('password'))
         user.password = await bcrypt.hash(user.password, 10);
-        // user.save(); 
-    } 
+     
     next();
 });
 const User = mongoose.model('User', userSchema);

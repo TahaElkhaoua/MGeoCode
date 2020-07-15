@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 let gridSchema = new mongoose.Schema({
-    alias: String,
+    size: {
+        type: String,
+        maxlength: 1,
+        minlength: 1
+    },
+    city: {
+        type: mongoose.Types.ObjectId,
+        ref: 'City'
+    }, 
     coords: [
         [
             {
@@ -15,7 +23,7 @@ let gridSchema = new mongoose.Schema({
         ]
     ]
 
-}, {useTimestamps: true});
+}, {timestamps: true});
 
 
 let Grid = mongoose.model('Grid', gridSchema);
