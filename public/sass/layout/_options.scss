@@ -16,7 +16,7 @@
 
     &__item{
         width: 100%;
-        padding: 1rem;
+        padding: .5rem;
         padding-left: 5rem;
         padding-right: 0rem;
         display: grid;
@@ -33,6 +33,7 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+
         }
     }
 
@@ -79,8 +80,8 @@
     }
     
     &__svg {
-        width: 2rem;
-        height: 2.5rem;
+        width: 1.5rem;
+        height: 2rem;
         margin-right: 1rem;
     }
 

@@ -10,6 +10,7 @@
             this.grid = [];
             this.polyHandler;
             this.cityIdHolder;
+            this.searchPoly;
         }
         MainController.prototype = {
             retrieveCities: async function(){
@@ -36,11 +37,14 @@
                 }
                 return 'N/A';
             },
-            _retrievePoly: async function(id){
+            _retrievePoly: async function(id, draw=true){
                 var polies = await (await fetch('/get-polies/'+id, {method: 'POST'})).json();
                 
+              if(draw){
                 if(this.pol) this.pol.setMap(null);
                 this.pol = this.map.addPoly(polies);
+              }
+              this.map._zoomToObject(undefined,polies);
             },
             _getGridId: function(cid){
                 for(var i=0;i<this.data.length;i++){
@@ -52,22 +56,27 @@
             _retrieveGrid: async function(id){
                 var self = this;
                 var rects = await (await fetch('/get-grids/'+id, {method: 'POST'})).json();
-
                 var i = 0;
                 this._emptyGrid();
-                rects.forEach(function(anotherArr){
-                    anotherArr.forEach(function(rect){
+                var arr = new List();
+                for(var n=0;n<rects.length;n++){
+                    var arrLat = new List();
+                    for(var l=0;l<rects[n].length;l++){
 
-                        self.grid.push(self.map.addGrid(new Rect(rect.center, [
-                            rect.leftBot,
-                            rect.rightBot,
-                            rect.rightTop,
-                            rect.leftTop
+                        var r = new Rect(rects[n][l].center, [
+                            rects[n][l].leftBot,
+                            rects[n][l].rightBot,
+                            rects[n][l].rightTop,
+                            rects[n][l].leftTop
                         ],
-                        ++i).getPath()));
-                    });
-                });
+                        ++i);
+                        self.grid.push(self.map.addGrid(r.getPath()));
+                        arrLat.add(r);
+                    };
+                    arr.add(arrLat);
+                };
 
+                self.polyHandler = new PolyHandler(undefined, undefined, undefined, self.pol, undefined, arr);
             },
             _emptyGrid: function(){
                 this.grid.forEach(function(grid){
@@ -134,13 +143,38 @@
                     if(self._hasCityGrid(city._id)){
                         sInp.onclick = function(){
                             if(this.checked){
+                                self._retrievePoly(city.polycords, false);
                                 self._retrieveGrid(self._getGridId(city._id));
+                                document.querySelector('.search').style.display = "block";
+                                document.querySelector('.search form').onsubmit = function(e){
+                                    e.preventDefault();
+                                    var coords = document.querySelector('.search__box').value;
+                                    var zoneRect = self.polyHandler.findZone(JSON.parse(coords));
+
+                                    var poly = [ zoneRect.leftBot,
+                                        zoneRect.rightBot,
+                                        zoneRect.rightTop,
+                                        zoneRect.leftTop];
+                                    self.map._zoomToObject(undefined, poly);
+
+                                    if(self.searchPoly)
+                                        self.searchPoly.setMap(null);
+
+                                    self.searchPoly = self.map.addSearchPoly(poly);
+
+                                };
                             }else {
                                 self._emptyGrid();
+                                document.querySelector('.search__box').value  = "";
+                                if(self.searchPoly)
+                                    self.searchPoly.setMap(null);
+                                document.querySelector('.search').style.display = "none";
                             }
                         };
                         stats.appendChild(sInp);
                     }else{
+                        document.querySelector('.search__box').value  = "";
+
                         var btn = document.createElement('button');
                         btn.classList.add('options__btn');
                         btn.innerHTML = 'Generate Grid';

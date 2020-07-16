@@ -72,9 +72,25 @@
                     paths: path,
                     strokeColor: '#ecf0f1',
                     strokeOpacity: .8,
-                    strokeWeight: 4,
+                    strokeWeight: 2,
                     fillColor: '#34495e',
                     fillOpacity: .1
+                  });
+                  if(action)
+                  google.maps.event.addListener(poly, 'click', action);
+
+                  poly.setMap(this.gMap);
+                  this._zoomToObject(poly);
+                  return poly;
+            },
+            addSearchPoly: function(path, action){
+                var poly = new google.maps.Polygon({
+                    paths: path,
+                    strokeColor: '#ecf0f1',
+                    strokeOpacity: .8,
+                    strokeWeight: 4,
+                    fillColor: '#ff7675',
+                    fillOpacity: .7
                   });
                   if(action)
                   google.maps.event.addListener(poly, 'click', action);
@@ -87,10 +103,10 @@
                 var poly = new google.maps.Polygon({
                     paths: path,
                     strokeColor: '#ecf0f1',
-                    strokeOpacity: .8,
-                    strokeWeight: 1,
-                    fillColor: '#34495e',
-                    fillOpacity: .5
+                    strokeOpacity: 1,
+                    strokeWeight: .5,
+                    fillColor: '#81ecec',
+                    fillOpacity: .3
                   });
                   if(action)
                     google.maps.event.addListener(poly, 'click', action);
@@ -99,13 +115,19 @@
                 //   this._zoomToObject(poly);
                   return poly;
             },
-            _zoomToObject: function(obj){
+            _zoomToObject: function(obj, arr){
                 var bounds = new google.maps.LatLngBounds();
-                var points = obj.getPath().getArray();
+                var points = [];
+                if(typeof obj !== 'undefined')
+                    points = obj.getPath().getArray();
+                    else 
+                        points = arr;
                 for (var n = 0; n < points.length ; n++){
                     bounds.extend(points[n]);
                 }
-                this.gMap.fitBounds(bounds);
+                    this.gMap.fitBounds(bounds);
+
+
             }
         };
 
