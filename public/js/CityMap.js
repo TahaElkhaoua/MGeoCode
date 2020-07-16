@@ -3,8 +3,14 @@
 
     var CityMap = (function(){
 
-        function CityMap(polyHandler){
-            this.polyHandler = polyHandler;
+        function CityMap(polyHandlerS, polyHandlerM, polyHandlerL){
+            this.polyHandlerS = polyHandlerS;
+            this.polyHandlerM = polyHandlerM;
+            this.polyHandlerL = polyHandlerL;
+
+            this.gs = "";
+            this.gm = "";
+            this.gl = "";
         }
         CityMap.prototype = {
             setId: function(id){
@@ -13,7 +19,7 @@
             createId: function(){
                 var self = this;
 
-                fetch('/create-grid', {
+                fetch('/generator/create-grid', {
                     method: 'POST',
                 }).then(function(res){
                     if(res.ok){
@@ -23,53 +29,83 @@
                     }
                 });
             },
-            storeInDatabase: function(id, callback){
-                var i = 0;
+            storeInDatabase: async function(name, gS , gM, gL){
+                    if(typeof gM === 'undefined' && typeof gL === 'undefined' && typeof gS === 'undefined'){
+                        var polyID;
+                    var data = new URLSearchParams();
+                    data.append('data', JSON.stringify(this.polyHandlerS.polies));
+    
+                    //Store Poly
+                    var res = await fetch('/generator/create-poly', {
+                        method: 'POST',
+                        body: data
+                    })
+                        if(res.ok){
+                            polyID = await res.json();
+                        }
+                    //Create City
+    
+                    data = new URLSearchParams();
+                    data.append('name', name);
+                    data.append('polyref', polyID);
+                    res = await fetch('/generator/create-city', {
+                        method: 'POST',
+                        body: data
+                    });
+                    var gData;
+                    if(!res.ok)
+                    return false;
+
+                    gData = await res.json();
+                    document.body.innerHTML = JSON.stringify(gData);
+                    
+                    }
+                    if(typeof gS !== 'undefined')
+                           this._fillGrid(this.polyHandlerS, gS);
+                    if(typeof gM !== 'undefined')
+                           this._fillGrid(this.polyHandlerM, gM);
+
+                    if(typeof gL !== 'undefined')
+                            this._fillGrid(this.polyHandlerL, gL);
+
+
+                    // this._fillFullGrid(this.polyHandlerS, gData.gS);
+            
+
+
+
+                    console.log('SUCCESS');
+
+            },
+            _fillGrid: async function(polyHandler, id){
                 var line = -1;
-                this.polyHandler.getArr().getArr().forEach(function(latArr){
+                polyHandler.getArr().getArr().forEach(async function(latArr){
                     line++;
-                    // [CREATE ITEM BY ITEM PROVIDES A WAY TO ADD ID KEYS]
-                    // latArr.getArr().forEach(function(rect){
-                    //     i++;
-                    //     var data = new URLSearchParams();
-                    //     // data.append('idAlias' , i);
-                    //     // data.append('leftBot' ,{lat:rect.leftBot.lat, lng:rect.leftBot.lng});
-                    //     // data.append('rightBot',rect.rightBot);
-                    //     // data.append('rightTop' ,rect.rightTop);
-                    //     // data.append('leftTop' ,rect.leftTop);
-                        
-                    //     rect.id = i;
-                    //     data.append('obj', JSON.stringify(rect));
-
-                    //     fetch('/create-grid/'+(id || this.id)+'/'+line, {
-                    //         method: 'POST',
-                    //         body: data
-                    //     }).then(function(res){
-                    //         if(res.ok){
-                    //             res.text().then(function(text){
-                    //                 console.log(text);
-                    //             });
-                    //         }
-                    //     }).catch(function(err){
-                    //         console.log(err);
-                    //     });
-
-
-                    // });
-
+                
                     //[ADD BY ARRAY NEED TO LOOP THROUGH ITEMS TO ADD ID KEYS]
                     var data = new URLSearchParams();
                     data.append('data', JSON.stringify(latArr.getArr()));
-                    fetch('/create-grid-lat/'+ id +'/'+line, {
+                    var res = await fetch('/generator/create-grid-lat/'+ id +'/'+line, {
                                 method: 'POST',
                                 body: data,
-                            }).then(function(res){
-                                if(res.ok){
-                                   console.log('SUCCESS');
-                                }
                             });
-
                 });
+                return true;
+
+            },
+            _fillFullGrid: async function(polyHandler, id){
+                var arr = [];
+                polyHandler.getArr().getArr().forEach(async function(latArr){
+                    arr.push(latArr.getArr());
+                });
+
+                  //[ADD BY ARRAY NEED TO LOOP THROUGH ITEMS TO ADD ID KEYS]
+                  var data = new URLSearchParams();
+                  data.append('data', JSON.stringify(arr));
+                  var res = await fetch('/generator/create-full-grid/'+ id, {
+                              method: 'POST',
+                              body: data,
+                          });
             },
             retrieveFromDatabase: function(id, callback){
                 // var xml = new XMLHttpRequest();
@@ -77,7 +113,7 @@
                 // xml.setRequestHeader('Content-Type', 'application/json');
                 // xml.send();
                 var self = this;
-              fetch("/get-grid/"+(id || this.id), {
+              fetch("/generator/get-grid/"+(id || this.id), {
                   method: 'POST'
               }).then(function(res){
                   if(res.ok){

@@ -4,6 +4,8 @@ const isAuthenticated = require('../middleware/auth');
 
 
 const Grid = require('../models/Grid');
+const Poly = require('../models/Poly');
+const City = require('../models/City');
 
 const isAdmin = (req, res, next)=>{
     if(!req.user.admin)
@@ -57,6 +59,21 @@ router.post('/create-grid-lat/:id/:line', async (req, res)=>{
     res.send('success');
 });
 
+
+router.post('/create-full-grid/:id', async (req, res)=>{
+    const grid = await Grid.findOne({_id:  (req.params.id)});
+    if(!grid)
+        return res.status(404).send();
+
+        grid.coords = (JSON.parse(req.body.data));
+
+
+        await grid.save();
+    res.send('success');
+});
+
+
+
 router.post('/get-grid/:id', async (req, res)=>{
     const grid = await Grid.findOne({_id:  (req.params.id)});
     if(!grid)
@@ -66,13 +83,40 @@ router.post('/get-grid/:id', async (req, res)=>{
 });
 
 
+//Create Polies 
 
+router.post('/create-poly', async (req, res)=>{
+    const poly = new Poly({
+        coords: JSON.parse(req.body.data).items
+    });
+    await poly.save();
+    res.json(poly._id);
+});
 
+//Create City
 
+router.post('/create-city', async(req, res)=>{
+    const city = new City({
+        name: req.body.name,
+        polycords: req.body.polyref
+    });
+    await city.save();
 
+    const gS = new Grid({size: 'S', city: city._id});
+    const gM = new Grid({size: 'M', city: city._id});
+    const gL = new Grid({size: 'L', city: city._id});
+    
+    await gS.save();
+    await gM.save();
+    await gL.save();
 
-
-
+    res.json({
+        city: city._id,
+        gS: gS._id,
+        gM: gM._id,
+        gL: gL._id,
+    });
+});
 
 
 module.exports = router;

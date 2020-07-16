@@ -1,0 +1,28 @@
+   // [CREATE ITEM BY ITEM PROVIDES A WAY TO ADD ID KEYS]
+                    // latArr.getArr().forEach(function(rect){
+                    //     i++;
+                    //     var data = new URLSearchParams();
+                    //     // data.append('idAlias' , i);
+                    //     // data.append('leftBot' ,{lat:rect.leftBot.lat, lng:rect.leftBot.lng});
+                    //     // data.append('rightBot',rect.rightBot);
+                    //     // data.append('rightTop' ,rect.rightTop);
+                    //     // data.append('leftTop' ,rect.leftTop);
+                        
+                    //     rect.id = i;
+                    //     data.append('obj', JSON.stringify(rect));
+
+                    //     fetch('/create-grid/'+(id || this.id)+'/'+line, {
+                    //         method: 'POST',
+                    //         body: data
+                    //     }).then(function(res){
+                    //         if(res.ok){
+                    //             res.text().then(function(text){
+                    //                 console.log(text);
+                    //             });
+                    //         }
+                    //     }).catch(function(err){
+                    //         console.log(err);
+                    //     });
+
+
+                    // });

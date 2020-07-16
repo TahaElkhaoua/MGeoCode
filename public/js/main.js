@@ -1,3 +1,5 @@
+
+
 (function(win, doc, mapster){
     var options =  {
         center: {lat : 33.5803154,lng: -7.6036127}, //Casa Center
@@ -15,6 +17,8 @@
     var casaCity = new CityMap(casaPolyHandler);
 
 
+    var mapC = MainController.create(map);
+    mapC.retrieveCities();
 
     // casaPolyHandler.createGrid(win.casaPoly.getArr());
     // casaCity.createId();
@@ -26,8 +30,6 @@
         //     console.log(casaPolyHandler.findZone({lat, lng}));
         // }
     // });
-
-
     // casaPolyHandler = new PolyHandler(
     //     new LatLng(33.5803154,-7.6036127),
     //     .001,.0008,

@@ -70,9 +70,9 @@
             addPoly: function(path, action){
                 var poly = new google.maps.Polygon({
                     paths: path,
-                    strokeColor: '#FFF',
-                    strokeOpacity: 0.3,
-                    strokeWeight: 1,
+                    strokeColor: '#ecf0f1',
+                    strokeOpacity: .8,
+                    strokeWeight: 4,
                     fillColor: '#34495e',
                     fillOpacity: .1
                   });
@@ -80,7 +80,32 @@
                   google.maps.event.addListener(poly, 'click', action);
 
                   poly.setMap(this.gMap);
+                  this._zoomToObject(poly);
                   return poly;
+            },
+            addGrid: function(path, action){
+                var poly = new google.maps.Polygon({
+                    paths: path,
+                    strokeColor: '#ecf0f1',
+                    strokeOpacity: .8,
+                    strokeWeight: 1,
+                    fillColor: '#34495e',
+                    fillOpacity: .5
+                  });
+                  if(action)
+                    google.maps.event.addListener(poly, 'click', action);
+
+                  poly.setMap(this.gMap);
+                //   this._zoomToObject(poly);
+                  return poly;
+            },
+            _zoomToObject: function(obj){
+                var bounds = new google.maps.LatLngBounds();
+                var points = obj.getPath().getArray();
+                for (var n = 0; n < points.length ; n++){
+                    bounds.extend(points[n]);
+                }
+                this.gMap.fitBounds(bounds);
             }
         };
 

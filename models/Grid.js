@@ -4,11 +4,13 @@ let gridSchema = new mongoose.Schema({
     size: {
         type: String,
         maxlength: 1,
-        minlength: 1
+        minlength: 1,
+        required: true
     },
     city: {
         type: mongoose.Types.ObjectId,
-        ref: 'City'
+        ref: 'City',
+        required: true
     }, 
     coords: [
         [
