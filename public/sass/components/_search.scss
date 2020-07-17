@@ -6,7 +6,6 @@
 
     width: 43rem;
     height: 3.5rem;
-    background-color: white;
 
     display: none;
   
@@ -46,5 +45,36 @@
         font-family: $font--primary;
 
         border: none;
+    }
+    &__define {
+        // height: 20rem;
+        height: 0rem;
+        width: 100%;
+
+        background-color: #242830;
+        transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) .5s;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        h2 {
+            color: white;
+            font-size: 2.5rem;
+        }
+        &--show {
+            height: 10rem;
+        }
+    }
+    &__extra__define {
+        width: 100%;
+        height: 0;
+
+        background-color: white;
+        transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) .5s;
+        &--show {
+            height: 20rem;
+        }
     }
 }

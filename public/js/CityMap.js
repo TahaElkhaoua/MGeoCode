@@ -83,6 +83,7 @@
                     line++;
                 
                     //[ADD BY ARRAY NEED TO LOOP THROUGH ITEMS TO ADD ID KEYS]
+
                     var data = new URLSearchParams();
                     data.append('data', JSON.stringify(latArr.getArr()));
                     var res = await fetch('/generator/create-grid-lat/'+ id +'/'+line, {

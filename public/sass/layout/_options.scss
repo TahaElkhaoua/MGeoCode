@@ -50,6 +50,7 @@
         // margin-bottom: 1rem;
         padding: 0rem !important;
         padding-left: 7rem !important;
+        padding-right: 7rem !important;
         border: none !important;
         transition: all .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
@@ -58,6 +59,21 @@
             height: 100%,
         }
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .genstat {
+        padding: .5rem;
+        cursor: pointer;
+        background-color: $color--primary--blue;
+        color: white;
+
+        font-family: $font--primary;
+
+        border: none;
+        }
     }
     &__toggle {
         display: none;
@@ -84,8 +100,20 @@
         height: 2rem;
         margin-right: 1rem;
     }
+    &__svg__conf {
+        height: 1.5rem;
+        width: 1.5rem;
+        align-self: center;
+
+        transition: all .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        &--show {
+            transform: rotate(180deg);
+        }
+    }
 
     label {
         font-size: 2rem;
     }
 }
+

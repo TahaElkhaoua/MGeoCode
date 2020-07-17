@@ -9,7 +9,7 @@
             this.lngDiff = lngDiff;
             this.polies = polies;
             this.size = size;
-            this.rects = multiArr || new List(); //multidimensional Array
+            this.rects = multiArr || List.create(); //multidimensional Array
         }
         PolyHandler.prototype = {
             //Create A Rectangle from center
@@ -26,17 +26,21 @@
                     leftTop
                 ], id);
             },
-            _contains: function(polies, lat, lng){
+            _contains: function(lat, lng){
+                var self = this;
                     return google.maps.geometry.poly.containsLocation(
                         new google.maps.LatLng(lat, lng),
-                        new google.maps.Polygon({paths: polies})
+                        new google.maps.Polygon({paths: self.polies.getArr()})
                     );
             },
-            _createRectsWithinLat: function(polies, center){ // Creating Latitude Rectangles within a city borders
-                var latRects = new List();
+            _createRectsWithinLat: function(center){ // Creating Latitude Rectangles within a city borders
+                var latRects = List.create();
                 var i = 2;
+                var polies = this.polies.getArr();
+
+                console.log(center, polies);
                 if(!this._contains(polies, center.lat, center.lng))
-                    return [];
+                    return ;
 
                 latRects.add(this._createRect(center));                
                 //Increasing Lat Position Rects
@@ -52,21 +56,21 @@
                 }
                 return latRects;
             },
-            createGrid: function(polies){
+            createGrid: function(){
                 var i = 2;
-                var doubleList = new List();
+                var doubleList =  List.create();
+                var polies = this.polies.getArr();
 
-
-                doubleList.add(this._createRectsWithinLat(polies, { lat: this.center.lat,lng: this.center.lng}));
+                doubleList.add(this._createRectsWithinLat({ lat: this.center.lat,lng: this.center.lng}));
                 while(this._contains(polies,this.center.lat, this.center.lng  + (this.lngDiff * i))){
-                    var rectL = this._createRectsWithinLat(polies, { lat: this.center.lat,lng:  this.center.lng + (this.lngDiff * i)});
-                    doubleList.add(rectL);
-                    i+=2;
+                    var rectL = this._createRectsWithinLat({ lat: this.center.lat,lng:  this.center.lng + (this.lngDiff * i)});
+                        doubleList.add(rectL);
+                        i+=2;
                     // i+=300;
                 }
                 i = 2;
                 while(this._contains(polies,this.center.lat, this.center.lng  - (this.lngDiff * i))){
-                    var rectL = this._createRectsWithinLat(polies, { lat: this.center.lat,lng: this.center.lng - (this.lngDiff * i)});
+                    var rectL = this._createRectsWithinLat({ lat: this.center.lat,lng: this.center.lng - (this.lngDiff * i)});
                     doubleList.addToStart(rectL);
                     i+=2;
                     // i+=300;
@@ -74,16 +78,33 @@
            
                 this.rects = doubleList;
                 this._setupIds();
+                console.log(doubleList);
                 return doubleList;
             },
             //PORNOOOOOOOOOOOOO DOWN HERE
             _setupIds: function(){
                 var id = 0;
-                this.rects.actionOnAll(function(items){
-                    items.actionOnAll(function(item){
+                this.rects.actionOnAll(function(itemsList){
+                   if(itemsList){
+                    itemsList.actionOnAll(function(item){
                         item.gsId(++id);
                     });
+                   }
                 });
+                // var arr = this.rects.getArr();
+                // var cont = new List();
+                // for(var i=0;i<arr.length;i++){
+                //     var arr2 = arr[i].getArr();
+                //     var listLat = new List();
+                //     for(var n=0;n<arr2.length;n++){
+                        
+                //         var item = arr2[n];
+                //         item.id = ++id;
+                //         listLat.add(item);
+                //     }
+                //     cont.add(listLat);
+                // }
+                // this.rects = cont;
             },
             findZone: function(location){
                 //find Longitude Line

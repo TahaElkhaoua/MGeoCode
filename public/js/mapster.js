@@ -63,6 +63,12 @@
                     });
                 })
             },
+            addListener: function(event, callback){
+                this.gMap.addListener(event, function(e){
+                    alert('Hi');
+                    callback(e);
+                });
+            },
             _createMarker: function(opts){
                 opts.map = this.gMap;
                 return new google.maps.Marker(opts);
@@ -87,7 +93,7 @@
                 var poly = new google.maps.Polygon({
                     paths: path,
                     strokeColor: '#ecf0f1',
-                    strokeOpacity: .8,
+                    strokeOpacity: 0,
                     strokeWeight: 4,
                     fillColor: '#ff7675',
                     fillOpacity: .7
@@ -109,7 +115,9 @@
                     fillOpacity: .3
                   });
                   if(action)
-                    google.maps.event.addListener(poly, 'click', action);
+                    google.maps.event.addListener(poly, 'click', function(e){
+                        action(e);
+                    });
 
                   poly.setMap(this.gMap);
                 //   this._zoomToObject(poly);

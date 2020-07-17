@@ -6,7 +6,7 @@
     //     styles: win.mapStyle1
     //     };
     // var element = document.querySelector('.map');
-    // var map = mapster.create(element,options);
+    // // var map = mapster.create(element,options);
 
     var casaPolyHandlerS = new PolyHandler(
         {lat: 33.5803154,lng : -7.6036127},
@@ -15,7 +15,6 @@
         'S'
     );    
     casaPolyHandlerS.createGrid(win.casaPoly.getArr()); // Create Grid Since The Parametre is passed Empty
-
     var casaPolyHandlerM = new PolyHandler(
         {lat: 33.5803154,lng : -7.6036127},
         .003,.001,
@@ -23,7 +22,6 @@
         'M'
     );    
     casaPolyHandlerM.createGrid(win.casaPoly.getArr()); // Create Grid Since The Parametre is passed Empty
-
     var casaPolyHandlerL = new PolyHandler(
         {lat: 33.5803154,lng : -7.6036127},
         .006,.003,
@@ -31,18 +29,57 @@
         'L'
     );    
     casaPolyHandlerL.createGrid(win.casaPoly.getArr()); // Create Grid Since The Parametre is passed Empty
-
-
-
-
-
-
     var casaCity = new CityMap(casaPolyHandlerS, casaPolyHandlerM, casaPolyHandlerL);
-    win.startStoreProcess = function(){
-        casaCity.storeInDatabase('Casablanca');
+
+
+    ////////////////////////////////////////////////////
+    
+    // var rabatPolyHandlerS = new PolyHandler(
+    //     {lat: 33.9770334,lng: -6.8412577},
+    //     .001,.0008,
+    //     rabatPoly,
+    //     'S'
+    // );    
+    // rabatPolyHandlerS.createGrid(); // Create Grid Since The Parametre is passed Empty
+    // var rabatPolyHandlerM = new PolyHandler(
+    //     {lat: 33.9770334,lng: -6.8412577},
+    //     .003,.001,
+    //     rabatPoly,
+    //     'M'
+    // );    
+    // rabatPolyHandlerM.createGrid(win.rabatPoly.getArr()); // Create Grid Since The Parametre is passed Empty
+    // var rabatPolyHandlerL = new PolyHandler(
+    //     {lat: 33.9770334,lng: -6.8412577},
+    //     .006,.003,
+    //     rabatPoly,
+    //     'L'
+    // );    
+    // rabatPolyHandlerL.createGrid(win.rabatPoly.getArr()); // Create Grid Since The Parametre is passed Empty
+    // var rabatCity = new CityMap(rabatPolyHandlerS, rabatPolyHandlerM, rabatPolyHandlerL);
+
+
+    //////////////////////////////////////////////
+
+
+    win.startStoreProcess = function(city){
+        switch(city){
+            case 'casa': 
+                casaCity.storeInDatabase('Casablanca');
+                break;
+            case 'rabat': 
+                rabatCity.storeInDatabase('Rabat');
+                break;
+        }
     }
-    win.store = function(idS, idM, idL){
-        casaCity.storeInDatabase('Casablanca',idS , idM, idL);
+    win.store = function(city,idS, idM, idL){
+        switch(city){
+            case 'casa': 
+                casaCity.storeInDatabase('Casablanca',idS , idM, idL);
+                break;
+            case 'rabat': 
+                rabatCity.storeInDatabase('Rabat',idS , idM, idL);
+                break;
+        }
     }
 
     // casaCity.createId();

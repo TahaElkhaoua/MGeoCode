@@ -1,10 +1,19 @@
 (function(win, doc){
 
     var List = (function(){
-        function list(list){
+        function List(list){
             this.items = list || [];
         }
-        list.prototype = {
+        List.prototype = {
+            actionOnAll :  function(callback){
+                for(var i=0;i<this.items.length;i++){
+                    callback(this.items[i]);
+                }
+                // this.items.forEach(function(item){
+                //     callback(item);
+                // });
+            }
+            ,
             getArr: function(){
                 return this.items;
             },
@@ -36,14 +45,9 @@
             },
             addToStart: function(item){
                 this.items = [item].concat(this.items);
-            },
-            actionOnAll: function(callback){
-                this.items.forEach(function(item){
-                    callback(item);
-                });
             }
         }
-        return list;
+        return List;
     })();
     List.create = function(){
         return new List();
