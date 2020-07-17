@@ -35,21 +35,21 @@
     ////////////////////////////////////////////////////
     
     var rabatPolyHandlerS = new PolyHandler(
-        {lat: 33.9770334,lng: -6.8412577},
+        {lat: 33.9716912,lng: -6.8749692},
         .001,.0008,
         rabatPoly,
         'S'
     );    
     rabatPolyHandlerS.createGrid(); // Create Grid Since The Parametre is passed Empty
     var rabatPolyHandlerM = new PolyHandler(
-        {lat: 33.9770334,lng: -6.8412577},
+        {lat: 33.9716912,lng: -6.8749692},
         .003,.001,
         rabatPoly,
         'M'
     );    
     rabatPolyHandlerM.createGrid(win.rabatPoly.getArr()); // Create Grid Since The Parametre is passed Empty
     var rabatPolyHandlerL = new PolyHandler(
-        {lat: 33.9770334,lng: -6.8412577},
+        {lat: 33.9716912,lng: -6.8749692},
         .006,.003,
         rabatPoly,
         'L'

@@ -10,40 +10,23 @@
     var element = document.querySelector('.map');
     var map = mapster.create(element,options);
 
-    var casaPolyHandler = new PolyHandler(
-        {lat: 33.5803154,lng : -7.6036127},
-        .001,.0008
-    );
-    var casaCity = new CityMap(casaPolyHandler);
-
-
     var mapC = MainController.create(map);
     mapC.retrieveCities();
-    //{"lat" : 33.5803154,"lng": -7.6036127}
-    // casaPolyHandler.createGrid(win.casaPoly.getArr());
-    // casaCity.createId();
-    // console.log(casaCity);
-    // casaCity.storeInDatabase('5f0e06bd51ea6558c05d88e6');
-    // casaCity.retrieveFromDatabase('5f0de67bf530762d6838a9e3', function(){
-    //     casaCity.drawAll(map);
-        // win.find = function(lat, lng){
-        //     console.log(casaPolyHandler.findZone({lat, lng}));
-        // }
-    // });
-    // casaPolyHandler = new PolyHandler(
-    //     new LatLng(33.5803154,-7.6036127),
-    //     .001,.0008,
-    //     total
-    // );
 
-    // win.draw = function(){
-    //     casaPolyHandler.getArr().getArr().forEach(function(anotherArr){
-    //         anotherArr.getArr().forEach(function(rect){
-    //             map.addPoly(rect.getPath());
-    //         });
-    //     });
-    // }
-    
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } 
+      }
+      var self = this;
+    win.showPosition = function(position){
+        // map._zoomToObject(undefined, [{lat: position.coords.latitude,lng:  position.coords.longitude}]);
+    }
+    getLocation();
+  
+
 
     win.check = function(element, changer){
         var ele = document.querySelector("#"+changer);
@@ -56,6 +39,7 @@
         ele2.classList.add('options__svg__conf--show');
         }
     }
+    map.gMap.setZoom(13);
 
 
 })(window, document, window.Mapster || (window.Mapster = {}));

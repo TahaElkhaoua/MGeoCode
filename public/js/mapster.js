@@ -133,8 +133,8 @@
                 for (var n = 0; n < points.length ; n++){
                     bounds.extend(points[n]);
                 }
+                if(obj == undefined)
                     this.gMap.fitBounds(bounds);
-
 
             }
         };

@@ -20,7 +20,7 @@
 
         z-index: 999;
 
-         background-image: linear-gradient(to bottom right, rgba($color--primary--blue, .8), rgba($color--primary--blue--dark, .8)), url('../img/bg.jpeg');
+         background-image: linear-gradient(to bottom right, rgba(darken($color--primary--blue, 30), .8), rgba(darken($color--primary--blue--dark, 10), .8)), url('../img/bg.jpeg');
         background-color: $color--primary--blue;
 
         background-size: cover;

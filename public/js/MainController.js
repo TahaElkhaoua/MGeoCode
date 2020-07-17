@@ -128,9 +128,15 @@
                     // <input type="checkbox" id="casaCheck"></input>
                     var check = document.createElement('input');
                     check.type="checkbox";
+                    check.className = "PolyChecker"
                     check.onchange = function(e){
                         if(this.checked){
                             self._retrievePoly(city.polycords);
+                            var s = this;
+                            document.querySelectorAll('.PolyChecker').forEach(function(item){
+                                if(item !== s)
+                                    item.checked = false;
+                            });
                         }else {
                             self.pol.setMap(null);
                         }
@@ -142,10 +148,17 @@
                     var stats = document.createElement('div');
                     var sInp = document.createElement('input');
                     sInp.type = 'checkbox';
-
+                    sInp.className = "GridChecker";
                     if(self._hasCityGrid(city._id)){
                         sInp.onclick = function(){
                             if(this.checked){
+                                var s = this;
+                                document.querySelectorAll('.GridChecker').forEach(function(item){
+                                    if(item !== s)
+                                        item.checked = false;
+                                });
+                                if(self.searchPoly)
+                                self.searchPoly.setMap(null);
                                 self._retrievePoly(city.polycords, false);
                                 self._retrieveGrid(self._getGridId(city._id));
                                 document.querySelector('.search').style.display = "block";
@@ -196,7 +209,8 @@
                         stats.appendChild(sInp);
                     }else{
                         document.querySelector('.search__box').value  = "";
-
+                        if(self.searchPoly)
+                        self.searchPoly.setMap(null);
                         var btn = document.createElement('button');
                         btn.classList.add('options__btn');
                         btn.innerHTML = 'Generate Grid';
