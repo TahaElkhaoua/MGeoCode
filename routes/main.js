@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('../config/passport');
 
 const isAuthenticated = require('../middleware/auth');
+const genKey = require('../middleware/apikey');
 
 const User = require('../models/User');
 const City = require('../models/City');
@@ -102,6 +103,27 @@ router.post('/get-polies/:id', isAuthenticated, async (req, res)=>{
         return res.status(404).send('ERROR');
 
     res.json(p.coords);
+});
+
+
+
+
+
+
+///API GEN ROUTE
+
+router.post('/gen-key', isAuthenticated, genKey, async (req, res)=>{
+    const user = await User.findOne({_id: req.user._id});
+    if(user.apikeys.length <3){
+        user.apikeys.push({
+            key: req.key
+        });
+        await user.save();
+        res.send(req.key);
+    }else {
+        res.send('Only Three keys allowed per user');
+    }
+    
 });
 
 module.exports = router;

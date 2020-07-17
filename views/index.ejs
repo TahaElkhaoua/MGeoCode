@@ -14,12 +14,12 @@
         </div>
 
         <div class="container__options">
-            <div class="container__options-item">
+            <div class="container__options-item user-selector">
                 <svg>
                     <use xlink:href="/img/icons.svg#face"></use>
                 </svg>
             </div>
-            <div class="container__options-item">
+            <div class="container__options-item key-selector">
                 <svg>
                     <use xlink:href="/img/icons.svg#unlock"></use>
                 </svg>
@@ -30,15 +30,43 @@
                     <use xlink:href="/img/icons.svg#logout"></use>
                 </svg>
             </div>
+
+            <div class="container__options__content user__opts" >
+                <form action="" autocomplete="off">
+                    <h2>USER INFORMATION</h2>
+                    <div class="form__contain">
+                        <input autocomplete="new-password" id="phone" name="phone" type="text" class="form__control" placeholder="phone">
+                        <label for="">Phone</label>
+                    </div>
+                    <div class="form__contain">
+                        <input autocomplete="new-password" id="lEmail" name="email" type="email" class="form__control" placeholder="Email">
+                        <label for="">Email</label>
+                    </div>
+                    <div class="form__contain">
+                        <input autocomplete="new-password" id="lPassword" type="password" name="password" class="form__control" placeholder="password">
+                        <label for="">Password</label>
+                    </div>
+                    <input type="submit" class="form__control" value="update">
+                </form>
+            </div>
+
+
+            <div class="container__options__content key__opts">
+                <form action="" autocomplete="off">
+                    <h2>GENERATE API KEY</h2>
+                    <input type="submit" class="form__control" value="generate a new key">
+                    <p class='error-key'></p>
+                </form>
+                <div class="key__opts-key">
+                    <% if(user.apikeys.length > 0){ for(var i=0;i< user.apikeys.length;i++){%>
+
+                        <div class="key"><%=user.apikeys[i].key%></div>
+
+                        <% }} %>
+                </div>
+            </div>
         </div>
-        <!-- <ul class="menu">
-            <li class="menu__list"><button class="menu__btn">Select a city</button></li>
-            <li class="menu__list"><button class="menu__btn">Configure your your account</button></li>
-            <li class="menu__list"><button class="menu__btn">Integrate API</button></li>
-            <li class="menu__list"><button class="menu__btn">account settings</button></li>
-            <li class="menu__list"><button class="menu__btn">Generate your API key</button></li>
-            <li class="menu__list"><button class="menu__btn">logout</button></li>
-        </ul> -->
+    
     </div>
 
     <!-- //Main Content -->
@@ -58,19 +86,6 @@
                     </div>
                 </div>
                 <div class="options__content">
-                       <!-- <div class="options__item u-text-center">
-                            <div>5896</div>
-                            <div>Casablanca</div>
-                            <div>INACTIVE</div>
-                            <div>N/A</div>
-                            <div><input type="checkbox" id="casaCheck"><label for="casaCheck">Display Delimeters</label></div>
-                            <div>CLICK</div>
-                            <div><label for="casa">DOWN</label></div>
-                       </div>
-                       <input type="checkbox" onchange="check(this, '#casaP')" class="options__toggle" id="casa" />
-                        <div class="options__conf" id="casaP">
-                            Hello World
-                        </div> -->
                 </div>
         </div>
         </div>

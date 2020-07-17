@@ -174,6 +174,9 @@
                                             document.querySelector('.search__define').classList.add("search__define--show");
                                             document.querySelector('.search__define').innerHTML = '<h2>NO RESULT FOUND</h2>';
                                             document.querySelector('.search__extra__define').classList.remove("search__extra__define--show");
+
+                                            if(self.searchPoly)
+                                                self.searchPoly.setMap(null);
                                                 return ;
                                             }
 
@@ -194,6 +197,9 @@
                                             document.querySelector('.search__define').classList.add("search__define--show");
                                             document.querySelector('.search__define').innerHTML = '<h2>NO RESULT FOUND</h2>';
                                             document.querySelector('.search__extra__define').classList.remove("search__extra__define--show");
+                                            
+                                            if(self.searchPoly)
+                                                self.searchPoly.setMap(null);
                                         }
                                 };
                             }else {

@@ -28,7 +28,7 @@
   
 
 
-    win.check = function(element, changer){
+    check = function(element, changer){
         var ele = document.querySelector("#"+changer);
         var ele2 = document.querySelector('.'+changer);
         if(ele.classList.contains('options__conf--show')){
@@ -42,4 +42,55 @@
     map.gMap.setZoom(13);
 
 
+    setupOptionsUI = function(){
+        var userBtn = document.querySelector('.user-selector');
+        var keyBtn = document.querySelector('.key-selector');
+
+        var userDialogue = document.querySelector('.user__opts');
+        var keyDaialoque = document.querySelector('.key__opts');
+
+        userBtn.onho
+        userBtn.onclick = function(){
+            if(!userDialogue.classList.contains('container__options__content--selected')){
+                userDialogue.classList.add('container__options__content--selected');
+                userBtn.classList.add('container__options-item--selected');
+
+                keyDaialoque.classList.remove('container__options__content--selected');
+                keyBtn.classList.remove('container__options-item--selected');
+            }else{
+                userDialogue.classList.remove('container__options__content--selected');
+                userBtn.classList.remove('container__options-item--selected');
+            }
+        };
+        keyBtn.onclick = function(){
+            if(!keyDaialoque.classList.contains('container__options__content--selected')){
+                keyDaialoque.classList.add('container__options__content--selected');
+                keyBtn.classList.add('container__options-item--selected');
+
+                userDialogue.classList.remove('container__options__content--selected');
+                userBtn.classList.remove('container__options-item--selected');
+            }else{
+                keyDaialoque.classList.remove('container__options__content--selected');
+                keyBtn.classList.remove('container__options-item--selected');
+            }
+        };
+
+
+        document.querySelector('.key__opts form').onsubmit = async function(e){
+            e.preventDefault();
+            // keyBtn.click();
+            var data = await (await fetch('/gen-key', {method: 'POST'})).text();
+            var element = document.createElement('div');
+            element.className = "key";
+            if(data == 'Only Three keys allowed per user'){
+
+                document.querySelector('.error-key').innerHTML = data;
+                return;
+            }
+            element.innerHTML = data;
+            document.querySelector('.key__opts-key').append(element);
+        };
+    }
+
+    setupOptionsUI();
 })(window, document, window.Mapster || (window.Mapster = {}));

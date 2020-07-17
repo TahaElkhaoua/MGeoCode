@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: 0
     },
+    apikeys: [{
+        key: String
+    }],
     grids: [
         {
             city: {

@@ -40,6 +40,8 @@
         height: 100vh;
         display: grid;
 
+        position: relative;
+
         // background-color: yellow;
 
         grid-template-rows: 6rem 6rem 1fr 6rem;
@@ -49,7 +51,7 @@
         align-items: center;
 
         padding-top: 1rem;
-        row-gap: 1rem;
+        // row-gap: 1rem;
 
     }
     &__options-item {
@@ -73,10 +75,62 @@
                 fill: lighten($color--primary--blue, 40);
             }
         }
-
-
+        &--selected {
+            background-color: $color--primary--blue--dark;
+            & svg {
+                fill: lighten($color--primary--blue, 40);
+            }
+        }
     }
 
+    // .user__opts:hover, .user__opts:focus, .key__opts:hover, key__opts:focus{
+    //     width: 30rem;
+    // }
+    // .user-selector:hover ~ .user__opts {
+    //     width: 30rem;
+    // }
+    // .user-selector:hover ~ .key__opts{
+    //     width: 0rem;
+    // }
+    &__options__content {   
+        position: absolute;
+        width: 30rem;
+
+        background-color: $color--primary--blue--dark;
+
+        top: 1rem;
+        left: 4rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) .3s;
+
+        width: 0;
+        overflow: hidden;
+
+        form {
+            width: 80%;
+        }
+
+        h2 {
+            margin-bottom: 3rem;
+            text-align: center;
+            color: white;
+        }
+        input {
+            border-radius: 0 !important;
+        }
+        label {
+            color: white
+        }
+        &--selected {
+            width : 30rem;
+        }
+    }
 
     &__logo {
         display: none;
@@ -119,4 +173,43 @@
 .map {
     height: 70vh;
     width: 100%;
+}
+
+.key__opts-key {
+    padding: 2rem 0;
+    padding-bottom: 0;
+    width: 80%;
+    .key {
+
+        margin-bottom: 1rem;
+        padding: 1rem 0;
+        display: block;
+        
+        background-color: white;
+        width: 100%;
+
+        color: #242830;
+        font-family: $font--primary;
+
+        font-size: 1.2rem;
+        text-align: center;
+
+        position: relative;
+
+        &::after {
+            content: '';
+            width: .3rem;
+            height: .3rem;
+
+            position: absolute;
+            border-radius: 100px;
+
+            left: 20%;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background-color: #242830;
+        }
+    }
 }

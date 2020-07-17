@@ -65,6 +65,11 @@ html {
 body {
   position: relative; }
 
+.error-key {
+  font-size: 1rem;
+  color: #dfe6e9;
+  text-align: center; }
+
 .u-blue-light {
   color: white; }
 
@@ -512,13 +517,13 @@ body {
   .container__options {
     height: 100vh;
     display: grid;
+    position: relative;
     grid-template-rows: 6rem 6rem 1fr 6rem;
     grid-template-columns: 1fr;
     width: 100%;
     justify-content: center;
     align-items: center;
-    padding-top: 1rem;
-    row-gap: 1rem; }
+    padding-top: 1rem; }
   .container__options-item {
     width: 100%;
     padding: 2rem 0;
@@ -535,6 +540,37 @@ body {
       background-color: #2e86de; }
       .container__options-item:hover svg {
         fill: white; }
+    .container__options-item--selected {
+      background-color: #2e86de; }
+      .container__options-item--selected svg {
+        fill: white; }
+  .container__options__content {
+    position: absolute;
+    width: 30rem;
+    background-color: #2e86de;
+    top: 1rem;
+    left: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s;
+    width: 0;
+    overflow: hidden; }
+    .container__options__content form {
+      width: 80%; }
+    .container__options__content h2 {
+      margin-bottom: 3rem;
+      text-align: center;
+      color: white; }
+    .container__options__content input {
+      border-radius: 0 !important; }
+    .container__options__content label {
+      color: white; }
+    .container__options__content--selected {
+      width: 30rem; }
   .container__logo {
     display: none; }
   .container__website {
@@ -559,3 +595,29 @@ body {
 .map {
   height: 70vh;
   width: 100%; }
+
+.key__opts-key {
+  padding: 2rem 0;
+  padding-bottom: 0;
+  width: 80%; }
+  .key__opts-key .key {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    display: block;
+    background-color: white;
+    width: 100%;
+    color: #242830;
+    font-family: "Rubik", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    position: relative; }
+    .key__opts-key .key::after {
+      content: '';
+      width: .3rem;
+      height: .3rem;
+      position: absolute;
+      border-radius: 100px;
+      left: 20%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #242830; }
