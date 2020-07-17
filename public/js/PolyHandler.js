@@ -28,29 +28,30 @@
             },
             _contains: function(lat, lng){
                 var self = this;
-                    return google.maps.geometry.poly.containsLocation(
-                        new google.maps.LatLng(lat, lng),
-                        new google.maps.Polygon({paths: self.polies.getArr()})
-                    );
+                var check = google.maps.geometry.poly.containsLocation(
+                    new google.maps.LatLng(lat, lng),
+                    new google.maps.Polygon({paths: self.polies.getArr()})
+                );
+                    return check;
             },
             _createRectsWithinLat: function(center){ // Creating Latitude Rectangles within a city borders
                 var latRects = List.create();
                 var i = 2;
                 var polies = this.polies.getArr();
 
-                console.log(center, polies);
-                if(!this._contains(polies, center.lat, center.lng))
-                    return ;
+                if(!this._contains(center.lat, center.lng)){
+                    return latRects;
+                }
 
                 latRects.add(this._createRect(center));                
                 //Increasing Lat Position Rects
-                while(this._contains(polies,center.lat + (this.latDiff * i), center.lng)){
+                while(this._contains(center.lat + (this.latDiff * i), center.lng)){
                     latRects.add(this._createRect({ lat: center.lat + (this.latDiff * i),lng: center.lng}));
                     i += 2;
                 }
                 //Decreasing Lat Position Rects
                 i = 2;
-                while(this._contains(polies, center.lat - (this.latDiff * i), center.lng)){
+                while(this._contains(center.lat - (this.latDiff * i), center.lng)){
                     latRects.addToStart(this._createRect({ lat: center.lat - (this.latDiff * i), lng: center.lng}));
                     i += 2;
                 }
@@ -62,14 +63,14 @@
                 var polies = this.polies.getArr();
 
                 doubleList.add(this._createRectsWithinLat({ lat: this.center.lat,lng: this.center.lng}));
-                while(this._contains(polies,this.center.lat, this.center.lng  + (this.lngDiff * i))){
+                while(this._contains(this.center.lat, this.center.lng  + (this.lngDiff * i))){
                     var rectL = this._createRectsWithinLat({ lat: this.center.lat,lng:  this.center.lng + (this.lngDiff * i)});
                         doubleList.add(rectL);
                         i+=2;
                     // i+=300;
                 }
                 i = 2;
-                while(this._contains(polies,this.center.lat, this.center.lng  - (this.lngDiff * i))){
+                while(this._contains(this.center.lat, this.center.lng  - (this.lngDiff * i))){
                     var rectL = this._createRectsWithinLat({ lat: this.center.lat,lng: this.center.lng - (this.lngDiff * i)});
                     doubleList.addToStart(rectL);
                     i+=2;
