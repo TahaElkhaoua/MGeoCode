@@ -89,6 +89,24 @@
                   this._zoomToObject(poly);
                   return poly;
             },
+            addStatPoly: function(path, op, action){
+                var opa = (op > .4) ? op : .4;
+                    var poly = new google.maps.Polygon({
+                        paths: path,
+                        strokeColor: '#f1c40f',
+                        strokeOpacity: 1,
+                        strokeWeight: 1,
+                        fillColor: '#f1c40f',
+                        fillOpacity: op,
+                        zIndex: 100
+                      });
+                      if(action)
+                        google.maps.event.addListener(poly, 'click', action);
+    
+                      poly.setMap(this.gMap);
+                      this._zoomToObject(poly);
+                      return poly;
+            },
             addSearchPoly: function(path, action){
                 var poly = new google.maps.Polygon({
                     paths: path,
@@ -96,7 +114,8 @@
                     strokeOpacity: 0,
                     strokeWeight: 4,
                     fillColor: '#ff7675',
-                    fillOpacity: .7
+                    fillOpacity: .7,
+                    zIndex: 50
                   });
                   if(action)
                   google.maps.event.addListener(poly, 'click', action);

@@ -4,7 +4,6 @@ var inside = require('point-in-polygon');
 
 const User = require('../models/User');
 const Grid = require('../models/Grid');
-const City = require('../models/City');
 const Stat = require('../models/Stat');
 
 
@@ -108,7 +107,8 @@ router.post('/insert-data/:key', findUser, searchPoly, async (req, res)=>{
         //zone does not exist
         obj = JSON.parse(obj);
         obj["rect"] = req.rect;
-        stat.data.push();
+        stat.data.push(obj);
+        stat.markModified('data');
         await stat.save();
         res.json(stat);
    }

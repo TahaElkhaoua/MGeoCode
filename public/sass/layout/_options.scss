@@ -2,7 +2,7 @@
     height: 30vh;
     width: 100%;
 
-    // overflow: scroll;
+    overflow-y: scroll;
     background-color: #ffffff;
 
 
@@ -54,8 +54,12 @@
         border: none !important;
         transition: all .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+
         &--show {
-            padding: 3rem 7rem !important;
+            padding: 1.5rem 7rem !important;
             height: 100%,
         }
 
@@ -73,6 +77,35 @@
         font-family: $font--primary;
 
         border: none;
+        transition: all .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+        
+        }
+
+        .time-container {
+            padding-bottom: 2rem;
+            h2 {
+                font-weight: 300;
+                margin-bottom: 1rem;
+            }
+            select {
+                width: 100%;
+                text-align: center;
+                font-family: $font--primary;
+                font-weight: 200;
+
+                border: 1px dotted rgba(0, 0, 0, .3);
+
+                padding: .5rem .3rem;
+                option {
+                    text-align: center;
+                    font-family: $font--primary;
+                    font-weight: 200;
+                }
+            }
         }
     }
     &__toggle {

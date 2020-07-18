@@ -70,11 +70,18 @@
     &__extra__define {
         width: 100%;
         height: 0;
+        overflow: hidden;
 
         background-color: white;
         transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) .5s;
         &--show {
-            height: 20rem;
+            height: 23rem;
         }
     }
+}
+
+.chart {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
 }

@@ -35,21 +35,21 @@
     ////////////////////////////////////////////////////
     
     var rabatPolyHandlerS = new PolyHandler(
-        {lat: 33.9716912,lng: -6.8749692},
+        {lat: 34.0378992,lng: -6.8427075},
         .001,.0008,
         rabatPoly,
         'S'
     );    
     rabatPolyHandlerS.createGrid(); // Create Grid Since The Parametre is passed Empty
     var rabatPolyHandlerM = new PolyHandler(
-        {lat: 33.9716912,lng: -6.8749692},
+        {lat: 34.0378992,lng: -6.8427075},
         .003,.001,
         rabatPoly,
         'M'
     );    
     rabatPolyHandlerM.createGrid(win.rabatPoly.getArr()); // Create Grid Since The Parametre is passed Empty
     var rabatPolyHandlerL = new PolyHandler(
-        {lat: 33.9716912,lng: -6.8749692},
+        {lat: 34.0378992,lng: -6.8427075},
         .006,.003,
         rabatPoly,
         'L'
@@ -67,7 +67,7 @@
                 casaCity.storeInDatabase('Casablanca');
                 break;
             case 'rabat': 
-                rabatCity.storeInDatabase('Rabat');
+                rabatCity.storeInDatabase('Sale');
                 break;
         }
     }
@@ -77,7 +77,7 @@
                 casaCity.storeInDatabase('Casablanca',idS , idM, idL);
                 break;
             case 'rabat': 
-                rabatCity.storeInDatabase('Rabat',idS , idM, idL);
+                rabatCity.storeInDatabase('Sale',idS , idM, idL);
                 break;
         }
     }

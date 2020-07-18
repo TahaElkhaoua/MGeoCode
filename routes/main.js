@@ -128,4 +128,137 @@ router.post('/gen-key', isAuthenticated, genKey, async (req, res)=>{
 });
 
 
+
+//Statistical Module Response Route
+
+router.post('/month-stats', isAuthenticated,async (req, res)=>{
+    let user = req.user._id;
+    // let user = req.body.user;
+    let city = req.body.city;
+
+    let date = new Date();
+    let year = "-"+date.getFullYear();
+    let month = req.body.month;
+
+
+    let stats = await Stat.findOne({user, city});
+    //if stats exist
+    if(stats){
+        //if a specefic month is selected
+        if(month !== '0'){
+            let total = 0;
+            let selector = month+year;
+            let data = [];
+            for(let x=0;x<stats.data.length;x++){
+                if(selector in stats.data[x]){
+                    total += stats.data[x][selector];
+
+                    data.push({
+                        counter: stats.data[x][selector],
+                        rect: stats.data[x].rect
+                    });
+                }
+            }
+
+
+
+            let obj = {
+                total: total,
+                data: data
+            };
+
+            res.json(obj);
+        }else {
+
+            let total = 0;
+            let selector = month+year;
+            let data = [];
+            for(let x=0;x<stats.data.length;x++){
+                let counter = 0;
+                for(let n=1;n<=12;n++){
+                    selector = n+year;
+                    if(selector in stats.data[x]){
+                        total += stats.data[x][selector];
+                        counter += stats.data[x][selector];
+                    }
+                }
+               if(counter !=0){
+                data.push({
+                    counter: counter,
+                    rect: stats.data[x].rect
+                });
+               }
+            }
+
+
+
+            let obj = {
+                total: total,
+                data: data
+            };
+
+            res.json(obj);
+        }
+
+    }else {
+        res.json({total: 0});
+    }
+
+});
+
+
+router.post('/zone-stats/:city/:zone', isAuthenticated,async (req, res)=>{
+    let user = req.user._id;
+    // let user = req.body.user;
+    let city = req.params.city;
+    let zone = Number.parseInt(req.params.zone);
+
+    let stats = await Stat.findOne({user, city, 'data.zone': zone});
+    if(stats){
+
+        stats.data.forEach((statData)=>{
+            if(statData.zone == zone){
+                const obj = {};
+                for(var x=1;x<=12;x++){
+                    const selector = x + '-' + (new Date()).getFullYear();
+                    if(selector in statData){
+                        obj[""+x] = statData[selector];
+                    }else{
+                        obj[""+x] = 0;
+                    }
+                }
+                res.json(obj);
+                return;
+            }
+        });
+
+    }else {
+        res.json({});
+    }
+});
+
+router.post('/update', isAuthenticated, async (req, res)=>{
+    const user = await User.findOne({_id: req.user._id});
+
+    const phone = (req.body.phone.length > 8) ? req.body.phone : user.phone ;
+    const email = (req.body.email.length > 5) ? req.body.email : user.email;
+    const password = (req.body.password.length > 5) ? req.body.password : user.password;
+
+    user.profile.phone = phone;
+    user.email = email;
+    user.password = password;
+
+    try {
+        await user.save();
+        res.status(200).send("Success");
+    }catch(e){
+        res.status(400).send("Could not update");
+    }
+});
+
+router.get('/logout', (req, res)=>{
+    req.logout();
+    res.redirect('/');
+});
+
 module.exports = router;

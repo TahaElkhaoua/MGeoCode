@@ -11,6 +11,7 @@
             this.polyHandler;
             this.cityIdHolder;
             this.searchPoly;
+            this.statGrids = [];
         }
         MainController.prototype = {
             retrieveCities: async function(){
@@ -98,7 +99,7 @@
                     self.retrieveCities();
                 };
             }
-            ,_setUI: function(city){
+            ,_setUI: async function(city){
                 var self = this;
                 document.querySelector('.options__content').innerHTML = "";
                 this.cities.forEach(function(city){
@@ -152,6 +153,10 @@
                     if(self._hasCityGrid(city._id)){
                         sInp.onclick = function(){
                             if(this.checked){
+                                for(var x=0;x<self.statGrids.length;x++){
+                                    self.statGrids[x].setMap(null); 
+                                }
+                                self.statGrids = [];
                                 var s = this;
                                 document.querySelectorAll('.GridChecker').forEach(function(item){
                                     if(item !== s)
@@ -162,7 +167,7 @@
                                 self._retrievePoly(city.polycords, false);
                                 self._retrieveGrid(self._getGridId(city._id));
                                 document.querySelector('.search').style.display = "block";
-                                document.querySelector('.search form').onsubmit = function(e){
+                                document.querySelector('.search form').onsubmit = async function(e){
                                     e.preventDefault();
                                     var val = document.querySelector('.search__box').value.split(',');
                                     var coords = '{"lat":'+val[0]+',"lng":'+val[1]+'}';
@@ -193,6 +198,36 @@
                                             document.querySelector('.search__define').classList.add("search__define--show");
                                             document.querySelector('.search__define').innerHTML = '<h2>ZONE #'+zoneRect.id+'</h2>';
                                             document.querySelector('.search__extra__define').classList.add("search__extra__define--show");
+
+                                            var can = document.createElement('canvas');
+                                            can.className = "chart";
+                                            var chart = can.getContext('2d');
+                                            document.querySelector('.search__extra__define').innerHTML = "";
+                                            document.querySelector('.search__extra__define').appendChild(can);
+
+                                            let data = await(await fetch("/zone-stats/"+city._id+"/"+zoneRect.id, {method: 'POST'})).json();
+                                            var fillData = [];
+                                            if('1' in data){
+                                                for(var x=1;x<=12;x++){
+                                                    fillData.push(data[''+x]);
+                                                }
+                                            }else{
+                                                fillData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                                            }
+                                            var massPop = new Chart(chart, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: ['Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                                                    datasets: [
+                                                        {
+                                                            label: 'Users',
+                                                            data: fillData,
+                                                            backgroundColor: '#f1c40f'
+                                                        }
+                                                    ],
+                                                },
+                                                options: {}
+                                            });
                                         }else {
                                             document.querySelector('.search__define').classList.add("search__define--show");
                                             document.querySelector('.search__define').innerHTML = '<h2>NO RESULT FOUND</h2>';
@@ -203,6 +238,10 @@
                                         }
                                 };
                             }else {
+                                for(var x=0;x<self.statGrids.length;x++){
+                                    self.statGrids[x].setMap(null); 
+                                }
+                                self.statGrids = [];
                                 self._emptyGrid();
                                 document.querySelector('.search__box').value  = "";
                                 if(self.searchPoly)
@@ -252,9 +291,84 @@
                     conf.classList.add('options__conf');
                     conf.id = city.name+'P';
 
+                    var opts = document.createElement('select');
+                    opts.id = city.name+"-timezone";
+
+                    var fullYear = document.createElement('option');
+                    fullYear.value = '0';
+                    fullYear.innerHTML = "ALL YEAR";
+                    opts.appendChild(fullYear);
+
+                    for(var x=1;x<=12;x++){
+                        var month = document.createElement('option');
+                        month.value = x;
+                        month.innerHTML = x;
+                        opts.appendChild(month);
+                    }
+              
+
+
+                    var timeContainer = document.createElement('div');
+                    timeContainer.className = "time-container";
+
+                    var text = document.createElement('h2');
+                    text.innerHTML = 'Choose Month/Period :';
+                    timeContainer.appendChild(text);
+                    timeContainer.appendChild(opts);
+
                     var genStats = document.createElement('button');
                     genStats.classList.add('genstat');
-                    genStats.innerHTML = "GENERATE STATISTICS"
+                    genStats.innerHTML = "GENERATE STATISTICS";
+
+                    genStats.onclick = async function(){
+
+                        var data = new URLSearchParams();
+                        data.append('city', city._id);
+                        data.append('month', opts.value);
+
+                        let obj = await (await fetch('/month-stats', {method: 'POST', body: data})).json();
+                       if(obj.total == 0){ //No Data Found Path
+                           
+                       }else { // Data Generated
+                        if(!sInp.checked)
+                            sInp.click();
+
+                        // var total = obj.total;
+
+
+                        for(var x=0;x<self.statGrids.length;x++){
+                            self.statGrids[x].setMap(null); 
+                        }
+                        self.statGrids = [];
+
+                        var opTotal = 0;
+                        for(var x=0;x<obj.data.length;x++){
+                            var data = obj.data[x];
+                            opTotal = (data.counter > opTotal) ? data.counter : opTotal;
+                        }
+
+            
+                        obj.data.forEach(function(statData){
+                            var rect = [];
+                            var opacity = statData.counter / opTotal;
+                            for(var x=0;x<statData.rect.length;x++){
+                                rect.push({lat: statData.rect[x][0], lng: statData.rect[x][1]});
+                            }
+                            self._retrievePoly(city.polycords, false);
+
+                            self.statGrids.push(self.map.addStatPoly(rect, opacity, function(e){
+                                document.querySelector('.search').style.display = "block";
+                                document.querySelector('.search__box').value = e.latLng.lat() + ', '+e.latLng.lng();
+                                document.querySelector('.search__btn').click();
+                            
+                        }));
+                            
+                        });
+                       }
+                    }
+
+
+                    conf.appendChild(timeContainer);
                     conf.appendChild(genStats);
 
                     cont.appendChild(id);

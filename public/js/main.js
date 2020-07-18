@@ -92,5 +92,20 @@
         };
     }
 
+    document.querySelector('.user__opts form').onsubmit = async function(e){
+        e.preventDefault();
+        // keyBtn.click();
+
+        var dd = new URLSearchParams();
+
+        dd.append('email', document.querySelector('#lEmail').value);
+        dd.append('password', document.querySelector('#lPassword').value);
+        dd.append('phone', document.querySelector('#phone').value);
+
+        var data = await (await fetch('/update', {method: 'POST', body: dd})).text();
+       document.querySelector('.sucerr').innerHTML = data;
+    };
+
+
     setupOptionsUI();
 })(window, document, window.Mapster || (window.Mapster = {}));

@@ -47,6 +47,7 @@
         font-weight: 300;
         transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
+        visibility: hidden;
         // opacity: .3;
         img {
             display: block;
@@ -98,7 +99,9 @@
             padding: .5rem 4rem;
             font-family: $font--primary;
             font-size: 1.2rem;
-            border: 1px solid rgba($color--black, .3);
+            // border: 1px solid rgba($color--black, .3);
+            border: 1px dotted rgba(0, 0, 0, .3);
+
         }
         button {
             width: 100%;
@@ -119,6 +122,6 @@
         display: flex;
     }
     &--show &__content {
-        // opacity: 1;
+        visibility: visible;
     }
 }
