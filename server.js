@@ -19,8 +19,6 @@ const ejsMate = require('ejs-mate');
 
 const port = process.env.PORT || 5000;
 
-const Grid = require('./models/Grid');
-
 
 const publicPath = path.join(__dirname, 'public');
 
