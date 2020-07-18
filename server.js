@@ -38,6 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/', require('./routes/api'));
 app.use('/', require('./routes/main'));
 app.use('/generator', require('./routes/generator')); //MAP DATA GENERATOR SHOULD BE A PRIVATE ROUTE
 

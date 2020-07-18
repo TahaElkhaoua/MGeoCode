@@ -10,6 +10,7 @@ const City = require('../models/City');
 const { route } = require('./generator');
 const Grid = require('../models/Grid');
 const Poly = require('../models/Poly');
+const Stat = require('../models/Stat');
 
 router.get('/', isAuthenticated, (req, res)=>{
     res.render('index');
@@ -125,5 +126,6 @@ router.post('/gen-key', isAuthenticated, genKey, async (req, res)=>{
     }
     
 });
+
 
 module.exports = router;
