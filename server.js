@@ -7,6 +7,8 @@ require('./database/mongoose');
 const express = require('express');
 const app = express();
 
+const compression = require('compression');
+
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
@@ -25,6 +27,7 @@ const publicPath = path.join(__dirname, 'public');
 app.engine('ejs', ejsMate);
 
 app.set('view engine', 'ejs');
+app.use(compression());
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
