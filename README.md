@@ -6,13 +6,13 @@
  
  
  ##### How does it work ?
- The MGeoCode process breaks down to the following tasks :
- [x] Create account.
- [x] Generate an API key.
- [x] Choose a city to work with and generate grid to suit your precision purposes (small, medium, large).
- [x] Make post requests with coordinates of your users.
- [ ] Location will be saved to our database with the exact zone it was made from.
- [x] Login to your user interface to display and analyse data.
+ The MGeoCode process breaks down to the following tasks : </br>
+ [x] Create account.</br>
+ [x] Generate an API key.</br>
+ [x] Choose a city to work with and generate grid to suit your precision purposes (small, medium, large).</br>
+ [x] Make post requests with coordinates of your users.</br>
+ [ ] Location will be saved to our database with the exact zone it was made from.</br>
+ [x] Login to your user interface to display and analyse data.</br>
  
  ##### How to start?
  After creating your account and login in you will be directed to your user interface, which you will be able to use to generate your API key :
