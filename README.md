@@ -15,7 +15,9 @@
  [x] Login to your user interface to display and analyse data.</br>
  
  ##### How to start?
- After creating your account and login in you will be directed to your user interface, which you will be able to use to generate your API key :
+ APP Link : https://safe-brushlands-36983.herokuapp.com/
+ 
+ After visiting link and creating your account and login in you will be directed to your user interface, which you will be able to use to generate your API key :
  ![API_KEY_IMAGE](https://i.ibb.co/ZxC3YWH/snapshot-1595868908907.jpg)
  
   After creating of your api key you will be able to send post requests to the following URL : 
